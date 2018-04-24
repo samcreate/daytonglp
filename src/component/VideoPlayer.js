@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-import {Player, ControlBar, ReplayControl,
-    ForwardControl, CurrentTimeDisplay,
-    TimeDivider, PlaybackRateMenuButton, VolumeMenuButton } from 'video-react';
+import {Player, ControlBar, CurrentTimeDisplay, TimeDivider, VolumeMenuButton } from 'video-react';
 import '../../node_modules/video-react/dist/video-react.css';
 import {  Cookies } from 'react-cookie';
 import { instanceOf, string, bool} from 'prop-types';
@@ -294,9 +292,6 @@ export default class VideoPlayer extends Component {
 
     render() {
 
-        let overlayHeight = 'auto';
-
-        
 
         let { content, options, optionsCopy} = this.getVideoState(this.props.videoKey);
         let optionsHtml;
@@ -392,7 +387,7 @@ export default class VideoPlayer extends Component {
                 <h4 className="c-heading-4">{content.title}</h4>
                 <a href="#closeVideo" className="closeButton c-glyph x-hidden-focus" onClick={this.closeVideo.bind(this)} aria-labelledby="Close Video Overlay">close video</a>
                 <Player
-                    playsInline='false'
+                    playsInline={false}
                     startTime={content.video.lastPlayTime}
                     ref="player"
                     autoPlay={this.props.visible }>
