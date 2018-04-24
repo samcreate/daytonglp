@@ -27,6 +27,7 @@ export default class Gallery extends EventEmitter {
             this.slides[this.currentSlide].view.alpha = 1;
             this.slides[this.currentSlide].play();
             this.start = true;
+            this.emitEvent('slideStart', [this.slides[this.currentSlide]]);
         } else {
             this.currentSlide = -1;
             this.next();
@@ -46,5 +47,3 @@ export default class Gallery extends EventEmitter {
     }
     
 }
-// console.log('fuck you');
-// 

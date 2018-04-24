@@ -7,7 +7,7 @@ export default class GalleryItem extends EventEmitter {
         super();
 
         
-
+        this.smokeColor = gal.color;
         this.view = new PIXI.Container();
         this.image = PIXI.Sprite.fromImage(gal.img);
         this.text = PIXI.Sprite.fromImage(gal.txt);
@@ -38,6 +38,7 @@ export default class GalleryItem extends EventEmitter {
         this.view.alpha = 0;
         this.updateDimensions();
         this._animSetup();
+        
     }
 
     updateDimensions(){
@@ -84,7 +85,12 @@ export default class GalleryItem extends EventEmitter {
         if (this.timeline.progress() > 0.45 && !this.eventTriggered){
             this.emitEvent('tranitionStart', [this]);
             this.eventTriggered = true;
+
+            
         }
+       
+        
+       
     }
 
     play(){

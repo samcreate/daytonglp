@@ -13,6 +13,9 @@ function Smoke(app, mainLayer){
     this.uniforms.shift = { type: '1f', value: 1.6 };
     this.uniforms.time = { type: '1f', value: 0 };
     this.uniforms.speed = { type: 'v2', value: { x: 0.2, y: 0.3 } };
+    this.uniforms.transr = { type: '1f', value: 72.0 };
+    this.uniforms.transg = { type: '1f', value: 79.0 };
+    this.uniforms.transb = { type: '1f', value: 84.0 };
     this.animationPaussed = false;
 
     this.smokeShader = new PIXI.AbstractFilter(null, shaderCode, this.uniforms);

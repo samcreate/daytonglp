@@ -114,7 +114,7 @@ export default class Canvas extends Component {
             .to(this.topSmokeMid, 1.1, { alpha: 1, ease: Linear.easeNone }, 'whiteout')
             .to(this.smoke.smokeShader.uniforms.time, this.state.transitionTImeIn, { value: '+=0.875', ease: Sine.easeInOut }, 'whiteout')
             .to(this.smoke.smokeShader.uniforms.brightness, this.state.transitionTImeIn, { value: 7, ease: Sine.easeInOut }, 'whiteout')
-            .to(this.smoke.smokeShader.uniforms.whiteness, this.state.transitionTImeIn, { value: 1.1, ease: Sine.easeInOut }, 'whiteout');
+            .to(this.smoke.smokeShader.uniforms.whiteness, this.state.transitionTImeIn, { value: 0.9, ease: Sine.easeInOut }, 'whiteout');
 
             window.timeline = this.timeline;
         
@@ -125,13 +125,15 @@ export default class Canvas extends Component {
 
     setupGallery(){
         this.gallery = new Gallery([
-            { img: gallitem1_img, txt: gallitem1_txt, y: 200 }, 
-            { img: gallitem2_img, txt: gallitem2_txt, y: 200 },
-            { img: gallitem3_img, txt: gallitem3_txt, y: 200 },
-            { img: gallitem4_img, txt: gallitem4_txt, y: 200 }
+            { img: gallitem1_img, txt: gallitem1_txt, y: 200, color: { r:91.0, g:101.0, b:107.0} }, 
+            { img: gallitem2_img, txt: gallitem2_txt, y: 200, color: { r: 94.0, g: 96.0, b: 87.0 }  },
+            { img: gallitem3_img, txt: gallitem3_txt, y: 200, color: { r: 80.0, g: 83.0, b: 67.0 } },
+            { img: gallitem4_img, txt: gallitem4_txt, y: 200, color: { r: 91.0, g: 101.0, b: 107.0 } }
         ]);
         this.gallery.view.y = 150;
         this.gallery.on('startTransition', this.startTransition.bind(this));
+        this.gallery.on('slideStart', this.slideStart.bind(this));
+        
         this.mainLayer.addChild(this.gallery.view);
 
         
@@ -151,10 +153,18 @@ export default class Canvas extends Component {
     }
 
 
-    startTransition(){
-        
+    slideStart(slide) {
+
+       setTimeout(() => {
+           this.smoke.smokeShader.uniforms.transr.value = slide.smokeColor.r;
+           this.smoke.smokeShader.uniforms.transg.value = slide.smokeColor.g;
+           this.smoke.smokeShader.uniforms.transb.value = slide.smokeColor.b;
+       }, 1500);
+    }
+
+    startTransition() {
         this.timeline.play().timeScale(2.5);
-     
+
     }
 
     transitionComplete(){
