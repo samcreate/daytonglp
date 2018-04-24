@@ -1,0 +1,186 @@
+@font-face {
+  font-family: 'SegoeUI-Light';
+  src: url('../SegoeUI-Light.eot?#iefix') format('embedded-opentype'),  url('../SegoeUI-Light.woff') format('woff'), url('../SegoeUI-Light.ttf')  format('truetype'), url('../SegoeUI-Light.svg#SegoeUI-Light') format('svg');
+  font-weight: 400;
+}
+
+
+.videos{
+    color: white;
+    padding-bottom: 100px;
+}
+
+.videos p {
+    font-family: SegoeUI-Light;
+    text-transform: uppercase;
+    letter-spacing: 8px;
+    font-weight: 400;
+    font-size: 21px;
+    padding: 51px 0px;
+    line-height: 50px;
+}
+
+.video-react{
+    font-family: SegoeUI,"Helvetica Neue",Helvetica,Arial,sans-serif !important;
+}
+
+.hidden{
+    opacity: 0;
+    visibility: hidden;
+}
+
+.visible{
+    opacity: 1 !important;
+}
+
+.videoHolder  .closeButton{
+    display: inline-block;
+    overflow: hidden;
+    text-indent: -9999px;
+    float: right;
+    position: relative;
+    top: -35px;
+}
+.videoHolder  .closeButton:before{
+    content: '';
+    color: #fff;
+    float: left;
+    font-size: 18px;
+    line-height: 16px;
+    margin: 0;
+    text-indent: 0;
+
+}
+.videoHolder  .closeButton:hover{
+    opacity: 0.7;
+}
+    
+.videoHolder  .c-heading-4{
+    text-align: left;
+    padding-bottom: 2vh;
+    letter-spacing: 7px;
+    text-transform: uppercase;
+    
+}
+
+.videoHolder .modal {
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.9);
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    z-index: 999;
+    transition: opacity 0.5s;
+    opacity: 0;
+}
+
+.videoComponent{
+    z-index: 9999;
+    position: fixed !important;
+    left: 50%;
+    right: 50%;
+    transform: translate(-50%, -50%);
+    top: 0;
+    width: 100%;
+    max-width: 100%;
+    height: 0;
+    display: block;
+    vertical-align: top;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    color: #fff;
+    background-color: #000;
+    position: relative;
+    font-size: 10px;
+    line-height: 1;
+}
+
+
+.videoComponent div:first-child{
+    /* opacity: 0; */
+    transition: opacity 0.4s;
+    
+}
+
+.videoComponent .opt-content{
+    transform: translate(-50%, -50%);
+    top: 40%;
+    left: 50%;
+    position: relative;
+}
+
+.videoThumb{
+    padding: 0px 4% 58px 4%;
+}
+
+
+
+
+.videoThumb:hover .rectangle-box div,
+.videoThumb:focus .rectangle-box div{
+  transform: scale(1.2);
+}
+.videoThumb:hover .rectangle-box div .c-glyph,
+.videoThumb:focus .rectangle-box div .c-glyph{
+  transform: scale(0.8);
+}
+
+.videoThumb.coach .rectangle-box div{
+    background: url('../Video/coach-thumb.jpg');
+    background-position: center;
+    background-size: cover;
+    transition: all 8s;
+}
+
+.videoThumb.nurse .rectangle-box div{
+    background: url('../Video/nurse-thumb.jpg');
+    background-position: center;
+    background-size: cover;
+    transition: all 8s;
+}
+
+.videoThumb a{
+    display: block;
+}
+
+.videoThumb .context-glyph-tile.c-glyph {
+    font-size: 46px;
+    margin-bottom: 12px;
+    font-family: "MWF-MDL2";
+    transition: all 8s;
+}
+
+.rectangle-box{
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    
+    
+}
+.rectangle-box:before{
+        content: "";
+		display: block;
+		padding-top: 50%;
+}
+
+.rectangle-content{
+    position:  absolute;
+    top: 0; left: 0; bottom: 0; right: 0;
+    color: white;
+}
+
+.rectangle-content div {
+    
+    display: table;
+    width: 100%;
+    height: 100%;
+    
+    
+}
+.rectangle-content span {
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle;
+    color: white
+}
