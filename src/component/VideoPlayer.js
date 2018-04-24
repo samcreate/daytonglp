@@ -238,15 +238,21 @@ export default class VideoPlayer extends Component {
     }
 
     closeVideo(comingFromParent){
+        
         this.setState({
             visible: false
         });
         this.refs.player.pause();
         this.eventTrigger = false;
-        if (comingFromParent !== true) this.props.parent.closeVideo();
+        if (comingFromParent !== true){
+            this.props.parent.closeVideo();
+            comingFromParent.preventDefault();
+        }
     }
 
-    nextVideo(index){
+    nextVideo(index, e){
+        console.log(arguments);
+        if (e) e.preventDefault();
         //console.log('nextVideo', index)
         // eslint-disable-next-line
         this.state.optionsIndex = index;
@@ -260,7 +266,8 @@ export default class VideoPlayer extends Component {
         this.refs.videoOverlay.style.opacity = '0';
     }
 
-    playOtherVideoSeries(key){
+    playOtherVideoSeries(key, e){
+        e.preventDefault();
         // eslint-disable-next-line
         this.state.optionsIndex = NaN;
         this.props.parent.handleVideo(key);
@@ -300,7 +307,7 @@ export default class VideoPlayer extends Component {
                     </div>
                     <div data-grid="col-3"></div>
                     <div data-grid="col-6 pad-3x" className={this.state[this.props.videoKey].end.key +' videoThumb'}>
-                        <a onClick={() => this.playOtherVideoSeries(this.state[this.props.videoKey].end.key)} href={"#play" + this.state[this.props.videoKey].end.key} tabIndex="0" role="listitem" aria-labelledby="Play Other Video Series" className="end" >
+                        <a onClick={this.playOtherVideoSeries.bind(this, this.state[this.props.videoKey].end.key)} href={"#play" + this.state[this.props.videoKey].end.key} tabIndex="0" role="listitem" aria-labelledby="Play Other Video Series" className="end" >
                             <div className='rectangle-box'>
                                 <div className='rectangle-content'>
                                     <div>
@@ -325,7 +332,7 @@ export default class VideoPlayer extends Component {
                             <div data-grid="col-3"></div>
                         </div>
                         <div data-grid="col-12">
-                            < a href={'#' + options[0].video.button} onClick={() => this.nextVideo(1)} aria-labelledby={options[0].video.button}>{options[0].video.button} </a>
+                            < a href={'#' + options[0].video.button} onClick={this.nextVideo.bind(this, 1)} aria-labelledby={options[0].video.button}>{options[0].video.button} </a>
                         </div>
                     </div>
                 );
@@ -341,7 +348,7 @@ export default class VideoPlayer extends Component {
                             <div data-grid="col-3"></div>
                         </div>
                         <div data-grid="col-12">
-                            < a href={'#' + options[0].video.button} onClick={() => this.nextVideo(1)} aria-labelledby={options[0].video.button}>{options[0].video.button} </a>
+                            < a href={'#' + options[0].video.button} onClick={this.nextVideo.bind(this, 1)} aria-labelledby={options[0].video.button}>{options[0].video.button} </a>
                         </div>
                     </div>
                 );
@@ -358,7 +365,7 @@ export default class VideoPlayer extends Component {
                         <div data-grid="col-3"></div>
                     </div>
                     <div data-grid="col-5">
-                        < a href={'#' + options[0].video.button} onClick={() => this.nextVideo(0)} aria-labelledby={options[0].video.button}>{options[0].video.button} </a>
+                        < a href={'#' + options[0].video.button} onClick={this.nextVideo.bind(this, 0)} aria-labelledby={options[0].video.button}>{options[0].video.button} </a>
                     </div>
                     <div data-grid="col-2">
                         <p className="or">
@@ -366,7 +373,7 @@ export default class VideoPlayer extends Component {
                         </p>
                     </div>
                     <div data-grid="col-5">
-                        < a href={'#' + options[1].video.button} onClick={() => this.nextVideo(1)} aria-labelledby={options[0].video.button}>{options[1].video.button} </a>
+                        < a href={'#' + options[1].video.button} onClick={this.nextVideo.bind(this, 1)} aria-labelledby={options[0].video.button}>{options[1].video.button} </a>
                     </div>
                 </div>
             );

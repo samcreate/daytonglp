@@ -24,8 +24,10 @@ class Videos extends Component {
     }
 
 
-    handleVideo(vid){
-    
+    handleVideo(vid, e){
+       
+        if (e) e.preventDefault();
+
        this.setState({
            visible: true,
            videoKey: vid
@@ -34,7 +36,8 @@ class Videos extends Component {
     }
 
 
-    closeVideo(){
+    closeVideo(e){
+        
         this.setState({
             visible: false
         });
