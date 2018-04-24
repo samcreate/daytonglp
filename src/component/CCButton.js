@@ -12,9 +12,20 @@ export default class CCButton extends Component {
     constructor(props, context) {
         super(props, context);
         this.handleClick = this.handleClick.bind(this);
+        this.on = false;
     }
 
-    handleClick() {
+    handleClick(e) {
+        e.preventDefault();
+       if(this.on){
+           this.refs.ccbutton.style.opacity = 0.3;
+           this.on = false;
+       } else {
+           this.refs.ccbutton.style.opacity = 1;
+           this.on = true;
+           
+       }
+        this.props.parent.ccToggle(this.on);
     }
 
     render() {
@@ -23,11 +34,7 @@ export default class CCButton extends Component {
 
         return (
             <a
-                ref={
-                    (c) => {
-                        this.button = c;
-                    }
-                }
+                ref='ccbutton'
                 className={classNames(className, {
                     'video-react-control': true,
                     'video-react-button': true,
@@ -40,8 +47,8 @@ export default class CCButton extends Component {
                     backgroundPosition: 'center'
                 }}
                 tabIndex="0"
-                onClick={this.handleClick}
-            />
+                onClick={this.handleClick.bind(this)}
+            >Closed Capttioning</a>
         );
     }
 }

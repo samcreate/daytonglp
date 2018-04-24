@@ -55,6 +55,16 @@
   display: none !important;
 }
 
+.cc-button{
+  text-indent: -9999px;
+  opacity: 0.4;
+  transition: opacity 0.2s;
+}
+
+.cc-button:hover, .cc-button.active{
+  opacity: 1;
+}
+
 @media (max-width: 790px){
 
   .videoComponent .opt-content{

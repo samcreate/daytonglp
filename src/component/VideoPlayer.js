@@ -284,6 +284,14 @@ export default class VideoPlayer extends Component {
         }
     }
 
+    ccToggle(on){
+        if(on){
+            this.refs.player.video.video.textTracks[0].mode = "showing";
+        } else {
+            this.refs.player.video.video.textTracks[0].mode = "hidden";
+        }
+    }
+
     render() {
 
         let overlayHeight = 'auto';
@@ -393,9 +401,9 @@ export default class VideoPlayer extends Component {
                         <VolumeMenuButton order={1.1} vertical={true} />
                         <CurrentTimeDisplay order={4.1} />
                         <TimeDivider order={4.2} />
-                        <CCButton order={7.1} />
+                        <CCButton className="cc-button" order={7.1} parent={this} />
                     </ControlBar>
-                    <track label="English" kind="subtitles" srcLang="en" src={content.video.vtt[0].src} default />
+                    <track label="English" kind="subtitles" srcLang="en" src={content.video.vtt[0].src} ref="engSub" />
                     <track label="Deutsch" kind="subtitles" srcLang="de" src={content.video.vtt[1].src} />
                     <track label="Español" kind="subtitles" srcLang="es" src={content.video.vtt[2].src} />
                     <div id="vid-overlay" ref="videoOverlay" data-grid="container" style={{ display: 'none'}}>
