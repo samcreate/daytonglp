@@ -1,7 +1,6 @@
 
 
 import * as PIXI from 'pixi.js';
-import smoke from '../smoke.jpg';
 function Smoke(app, mainLayer){
     let shaderCode = document.getElementById('fragShader').innerHTML;
     this.count = 0;
@@ -22,7 +21,7 @@ function Smoke(app, mainLayer){
     
     //this.colorMatrix = new PIXI.filters.ColorMatrixFilter();
     
-    this.view = PIXI.Sprite.fromImage(smoke);
+    this.view = PIXI.Sprite.fromImage(window.smoke_shader);
     this.view.width = app.view.width;
     this.view.height = 705;
     this.view.filters = [this.smokeShader];

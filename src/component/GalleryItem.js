@@ -9,8 +9,8 @@ export default class GalleryItem extends EventEmitter {
         
         this.smokeColor = gal.color;
         this.view = new PIXI.Container();
-        this.image = PIXI.Sprite.fromImage(gal.img);
-        this.text = PIXI.Sprite.fromImage(gal.txt);
+        this.image = PIXI.Sprite.fromImage(gal.img, true);
+        this.text = PIXI.Sprite.fromImage(gal.txt, true);
         this.text.pos = { x: (window.innerWidth - (window.innerWidth * 0.80)) - (this.text.width - (this.text.width * 0.75)), y: gal.y};
         
         this.image.blendMode = PIXI.BLEND_MODES.SCREEN;

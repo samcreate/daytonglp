@@ -22,7 +22,7 @@
 }
 
 #vid-overlay a{
-    font-family: SegoeUI,"Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-family: SegoeUI,"Helvetica Neue",Helvetica,Arial,sans-serif !important;
     font-size: 12px;
     text-transform: uppercase;
     line-height: 3;

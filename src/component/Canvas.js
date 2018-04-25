@@ -2,19 +2,6 @@ import './Canvas.css';
 import React, { Component } from 'react';
 import * as PIXI from 'pixi.js'
 import Smoke from './Smoke';
-import topSmoke from '../top_smoke.png';
-import gallitem1_img from '../gallery/one.jpg';
-import gallitem1_txt from '../gallery/one-txt.png';
-import gallitem2_img from '../gallery/two.jpg';
-import gallitem2_txt from '../gallery/two-txt.png';
-import gallitem3_img from '../gallery/three.jpg';
-import gallitem3_txt from '../gallery/three-txt.png';
-import gallitem4_img from '../gallery/four.jpg';
-import gallitem4_txt from '../gallery/four-txt.png';
-
-import survive_txt from '../survive-txt.png';
-import survive_mobile_txt from '../survive-mobile-txt.png';
-
 import {  Linear, Sine, TimelineLite } from "gsap";
 import Gallery from './Gallery';
 import MobileDetect from 'mobile-detect';
@@ -60,8 +47,8 @@ export default class Canvas extends Component {
 
         //console.log('this.app', this.app.plugins.interaction.autoPreventDefault);
 
-        this.survive_txt = PIXI.Sprite.fromImage(survive_txt);
-        this.survive_mobile_txt = PIXI.Sprite.fromImage(survive_mobile_txt);
+        this.survive_txt = PIXI.Sprite.fromImage(window.hwy_survive);
+        this.survive_mobile_txt = PIXI.Sprite.fromImage(window.hwy_survive_mobile);
         this.smokeCoverUp = new PIXI.Container();
         this.smokeCoverUp.y = 0;
         
@@ -73,7 +60,7 @@ export default class Canvas extends Component {
     setupSmoke(){
         this.smoke = new Smoke(this.app, this.mainLayer);
         this.smoke.view.y = 0;
-        let topSmokeTexture = PIXI.Texture.fromImage(topSmoke);
+        let topSmokeTexture = PIXI.Texture.fromImage(window.top_smoke);
         this.topSmokeRight = new PIXI.extras.TilingSprite(
             topSmokeTexture,
             this.app.width,
@@ -125,10 +112,10 @@ export default class Canvas extends Component {
 
     setupGallery(){
         this.gallery = new Gallery([
-            { img: gallitem1_img, txt: gallitem1_txt, y: 200, color: { r:91.0, g:101.0, b:107.0} }, 
-            { img: gallitem2_img, txt: gallitem2_txt, y: 200, color: { r: 94.0, g: 96.0, b: 87.0 }  },
-            { img: gallitem3_img, txt: gallitem3_txt, y: 200, color: { r: 80.0, g: 83.0, b: 67.0 } },
-            { img: gallitem4_img, txt: gallitem4_txt, y: 200, color: { r: 91.0, g: 101.0, b: 107.0 } }
+            { img: window.img_one, txt: window.img_txt_one, y: 200, color: { r:91.0, g:101.0, b:107.0} }, 
+            { img: window.img_two, txt: window.img_txt_two, y: 200, color: { r: 94.0, g: 96.0, b: 87.0 }  },
+            { img: window.img_three, txt: window.img_txt_three, y: 200, color: { r: 80.0, g: 83.0, b: 67.0 } },
+            { img: window.img_four, txt: window.img_txt_four, y: 200, color: { r: 91.0, g: 101.0, b: 107.0 } }
         ]);
         this.gallery.view.y = 150;
         this.gallery.on('startTransition', this.startTransition.bind(this));
