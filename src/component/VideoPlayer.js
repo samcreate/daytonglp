@@ -35,112 +35,160 @@ export default class VideoPlayer extends Component {
             overlayVisible: false,
             optionsIndex:NaN,
             coach: {
-                end:{
-                    copy: 'Your choices determined coach\'s fate. Now watch the nurse\'s story.',
-                    key:'nurse' 
+                end: {
+                    copy: "Your choices determined coach's fate. Now watch the nurse's story.",
+                    key: "nurse"
                 },
                 mainVideo: {
-                    played: false,
-                    title: 'Coach',
+                    played: !1,
+                    title: "Coach",
                     video: {
                         lastPlayTime: 0,
-                        src: 'video/coach/1/main.mp4',
-                        button: 'Be Pragmatic',
-                        vtt: [
-                            { kind: 'subtitles', src: 'video/coach/1/vtt/sintel-en.vtt', srcLang: 'en', default: true },
-                            { kind: 'subtitles', src: 'video/coach/1/vtt/sintel-es.vtt', srcLang: 'es' },
-                            { kind: 'subtitles', src: 'video/coach/1/vtt/sintel-de.vtt', srcLang: 'de' }
-                        ]
+                        src: "https://compass-ssl.xbox.com/assets/e7/d4/e7d450f9-5930-495f-bbb8-6b9bb2dc6860.mp4?n=main.mp4",
+                        button: "Be Pragmatic",
+                        vtt: [{
+                            kind: "subtitles",
+                            src: "https://compass-ssl.xbox.com/assets/ce/c0/cec0f5a8-90e7-4a88-84b8-6abb1eecc40d.vtt?n=sintel-en.vtt",
+                            srcLang: "en",
+                            default: !0
+                        }, {
+                            kind: "subtitles",
+                            src: "https://compass-ssl.xbox.com/assets/72/17/7217d587-9b33-45d4-95db-5aafd399e086.vtt?n=sintel-es.vtt",
+                            srcLang: "es"
+                        }, {
+                            kind: "subtitles",
+                            src: "https://compass-ssl.xbox.com/assets/4a/12/4a12e9e7-c774-4353-8111-ab8f5257c06f.vtt?n=sintel-de.vtt",
+                            srcLang: "de"
+                        }]
                     }
                 },
                 options: {
-                    copy: 'Coach is Infected. If he turns he endagners everyone. What do you do?',
-                    content: [
-                        {
-                            played: false,
-                            title: 'Coach : Pragmatic',
-                            video: {
-                                lastPlayTime: 0,
-                                src: 'video/coach/3/pragmatic.mp4',
-                                button: 'Be Pragmatic',
-                                copy: 'You chose pragmatic and sacrificed coach. What if you had been compassionate?',
-                                vtt: [
-                                    { kind: 'subtitles', src: 'video/coach/3/vtt/sintel-en.vtt', srcLang: 'en', default: true },
-                                    { kind: 'subtitles', src: 'video/coach/3/vtt/sintel-es.vtt', srcLang: 'es' },
-                                    { kind: 'subtitles', src: 'video/coach/3/vtt/sintel-de.vtt', srcLang: 'de' }
-                                ]
-                            }
-                        },
-                        {
-                            played: false,
-                            title: 'Coach : Compassionate',
-                            video: {
-                                lastPlayTime: 0,
-                                src: 'video/coach/2/compassion.mp4',
-                                button: 'Be Compassionate',
-                                copy: 'You chose compassion and saved coach. What if you had been pragmatic?',
-                                vtt: [
-                                    { kind: 'subtitles', src: 'video/coach/2/vtt/sintel-en.vtt', srcLang: 'en', default: true },
-                                    { kind: 'subtitles', src: 'video/coach/2/vtt/sintel-es.vtt', srcLang: 'es' },
-                                    { kind: 'subtitles', src: 'video/coach/2/vtt/sintel-de.vtt', srcLang: 'de' }
-                                ]
-                            }
+                    copy: "Coach is Infected. If he turns he endangers everyone. What do you do?",
+                    content: [{
+                        played: !1,
+                        title: "Coach : Pragmatic",
+                        video: {
+                            lastPlayTime: 0,
+                            src: "https://compass-ssl.xbox.com/assets/64/b8/64b8ca5d-1616-474d-95de-5f1009050b7a.mp4?n=pragmatic.mp4",
+                            button: "Be Pragmatic",
+                            copy: "You chose pragmatic and sacrificed coach. What if you had been compassionate?",
+                            vtt: [{
+                                kind: "subtitles",
+                                src: "https://compass-ssl.xbox.com/assets/59/86/5986decc-1186-40a4-8f7e-662360a3b2e4.vtt?n=coach3sintel-en.vtt",
+                                srcLang: "en",
+                                default: !0
+                            }, {
+                                kind: "subtitles",
+                                src: "https://compass-ssl.xbox.com/assets/0d/99/0d99505a-e137-425f-bc65-823ad5547371.vtt?n=coach3sintel-es.vtt",
+                                srcLang: "es"
+                            }, {
+                                kind: "subtitles",
+                                src: "https://compass-ssl.xbox.com/assets/ce/db/cedb510d-538e-4de2-b70a-ab8a8f5af3c7.vtt?n=coach3sintel-de.vtt",
+                                srcLang: "de"
+                            }]
                         }
-                    ]
+                    }, {
+                        played: !1,
+                        title: "Coach : Compassionate",
+                        video: {
+                            lastPlayTime: 0,
+                            src: "https://compass-ssl.xbox.com/assets/2d/f6/2df64d39-6fcc-486e-96cd-97f6fd2784fa.mp4?n=compassion.mp4",
+                            button: "Be Compassionate",
+                            copy: "You chose compassion and saved coach. What if you had been pragmatic?",
+                            vtt: [{
+                                kind: "subtitles",
+                                src: "https://compass-ssl.xbox.com/assets/ae/f5/aef577ba-fc91-46fe-8326-fa046a1a67bc.vtt?n=coach2sintel-en.vtt",
+                                srcLang: "en",
+                                default: !0
+                            }, {
+                                kind: "subtitles",
+                                src: "https://compass-ssl.xbox.com/assets/24/23/242375a1-1c3c-4820-9f8d-a3cee31b7d35.vtt?n=coach2sintel-es.vtt",
+                                srcLang: "es"
+                            }, {
+                                kind: "subtitles",
+                                src: "https://compass-ssl.xbox.com/assets/d5/07/d5076245-5198-4849-8a67-08db513e145b.vtt?n=coach2sintel-de.vtt",
+                                srcLang: "de"
+                            }]
+                        }
+                    }]
                 }
             },
             nurse: {
                 end: {
-                    copy: 'Your choices determined Nurse\'s fate. Now watch the coach\'s story.',
-                    key: 'coach'
+                    copy: "Your choices determined Nurse's fate. Now watch the coach's story.",
+                    key: "coach"
                 },
                 mainVideo: {
-                    played: false,
-                    title: 'Nurse',
+                    played: !1,
+                    title: "Nurse",
                     video: {
                         lastPlayTime: 0,
-                        src: 'video/nurse/1/main.mp4',
-                        vtt: [
-                            { kind: 'subtitles', src: 'video/coach/1/vtt/sintel-en.vtt', srcLang: 'en', default: true },
-                            { kind: 'subtitles', src: 'video/coach/1/vtt/sintel-es.vtt', srcLang: 'es' },
-                            { kind: 'subtitles', src: 'video/coach/1/vtt/sintel-de.vtt', srcLang: 'de' }
-                        ]
+                        src: "https://compass-ssl.xbox.com/assets/8d/47/8d479b06-34fd-4c8c-a59f-bbb956bf66d8.mp4?n=nursemain.mp4",
+                        vtt: [{
+                            kind: "subtitles",
+                            src: "https://compass-ssl.xbox.com/assets/36/02/3602b1cb-531f-4c6c-b149-3737116c3a6f.vtt?n=nurse1sintel-en.vtt",
+                            srcLang: "en",
+                            default: !0
+                        }, {
+                            kind: "subtitles",
+                            src: "https://compass-ssl.xbox.com/assets/d6/1e/d61e5d05-0583-4b5c-a88d-71db30679bb7.vtt?n=nurse1sintel-es.vtt",
+                            srcLang: "es"
+                        }, {
+                            kind: "subtitles",
+                            src: "https://compass-ssl.xbox.com/assets/b1/de/b1ded8da-c149-4d90-b677-62a7db2e61eb.vtt?n=nurse1sintel-de.vtt",
+                            srcLang: "de"
+                        }]
                     }
                 },
                 options: {
-                    copy: 'NURSE\'S CAMP HAS BEEN RAIDED. SHE MUST ACT TO SAVE HER COMMUNITY. what do you do?',
-                    content: [
-                        {
-                            played: false,
-                            title: 'Nurse : BE DARING',
-                            video: {
-                                lastPlayTime: 0,
-                                src: 'video/nurse/2/daring.mp4',
-                                button: 'BE DARING',
-                                copy: 'You chose TO BE DARING and THE NURSE LOST HER LIFE. What if you had been PRUDENT?',
-                                vtt: [
-                                    { kind: 'subtitles', src: 'video/coach/1/vtt/sintel-en.vtt', srcLang: 'en', default: true },
-                                    { kind: 'subtitles', src: 'video/coach/1/vtt/sintel-es.vtt', srcLang: 'es' },
-                                    { kind: 'subtitles', src: 'video/coach/1/vtt/sintel-de.vtt', srcLang: 'de' }
-                                ]
-                            }
-                        },
-                        {
-                            played: false,
-                            title: 'Nurse : PRUDENT',
-                            video: {
-                                lastPlayTime: 0,
-                                src: 'video/nurse/3/prudent.mp4',
-                                button: 'Be PRUDENT',
-                                copy: 'You chose to be prudent and joined another community. What if you had been daring?',
-                                vtt: [
-                                    { kind: 'subtitles', src: 'video/coach/1/vtt/sintel-en.vtt', srcLang: 'en', default: true },
-                                    { kind: 'subtitles', src: 'video/coach/1/vtt/sintel-es.vtt', srcLang: 'es' },
-                                    { kind: 'subtitles', src: 'video/coach/1/vtt/sintel-de.vtt', srcLang: 'de' }
-                                ]
-                            }
+                    copy: "NURSE'S CAMP HAS BEEN RAIDED. SHE MUST ACT TO SAVE HER COMMUNITY. what do you do?",
+                    content: [{
+                        played: !1,
+                        title: "Nurse : BE DARING",
+                        video: {
+                            lastPlayTime: 0,
+                            src: "https://compass-ssl.xbox.com/assets/26/58/265830d9-77c2-458b-aa78-b44d62994507.mp4?n=daring.mp4",
+                            button: "BE DARING",
+                            copy: "You chose TO BE DARING and THE NURSE LOST HER LIFE. What if you had been PRUDENT?",
+                            vtt: [{
+                                kind: "subtitles",
+                                src: "https://compass-ssl.xbox.com/assets/5a/a2/5aa2bf10-be40-4b25-b5a6-a62093a18015.vtt?n=nurse2sintel-en.vtt",
+                                srcLang: "en",
+                                default: !0
+                            }, {
+                                kind: "subtitles",
+                                src: "https://compass-ssl.xbox.com/assets/e8/43/e843ad9f-00aa-4b4b-8c57-50db84938892.vtt?n=nurse2sintel-es.vtt",
+                                srcLang: "es"
+                            }, {
+                                kind: "subtitles",
+                                src: "https://compass-ssl.xbox.com/assets/50/2f/502fd080-3285-4d8f-9e28-3bea61472dd3.vtt?n=nurse2sintel-de.vtt",
+                                srcLang: "de"
+                            }]
                         }
-                    ]
+                    }, {
+                        played: !1,
+                        title: "Nurse : PRUDENT",
+                        video: {
+                            lastPlayTime: 0,
+                            src: "https://compass-ssl.xbox.com/assets/8d/de/8ddea03b-40d9-4f8a-a430-ead8107ea753.mp4?n=prudent.mp4",
+                            button: "Be PRUDENT",
+                            copy: "You chose to be prudent and joined another community. What if you had been daring?",
+                            vtt: [{
+                                kind: "subtitles",
+                                src: "https://compass-ssl.xbox.com/assets/84/8c/848c9939-bbb2-428f-afaf-b1c64f0dd1fb.vtt?n=nurse3sintel-en.vtt",
+                                srcLang: "en",
+                                default: !0
+                            }, {
+                                kind: "subtitles",
+                                src: "https://compass-ssl.xbox.com/assets/82/ec/82ec5b0a-0a2e-4b57-ad77-781acc00b9b2.vtt?n=nurse3sintel-es.vtt",
+                                srcLang: "es"
+                            }, {
+                                kind: "subtitles",
+                                src: "https://compass-ssl.xbox.com/assets/34/4d/344d22c9-900e-4145-8f4b-7e9d06e01b0e.vtt?n=nurse3sintel-de.vtt",
+                                srcLang: "de"
+                            }]
+                        }
+                    }]
                 }
             }
         }
@@ -148,7 +196,7 @@ export default class VideoPlayer extends Component {
     }
 
     handleStateChange(state, test) {
-        //console.log('VIDEO PLAYBACK TIME', state.currentTime);
+        //console.log('VIDEO PLAYBACK TIME', state);
         if (state.ended && this.eventTrigger === false) {
             //console.log('VIDEO ENDED');
             this.eventTrigger = true;
@@ -390,7 +438,9 @@ export default class VideoPlayer extends Component {
                     playsInline={false}
                     startTime={content.video.lastPlayTime}
                     ref="player"
-                    autoPlay={this.props.visible }>
+                    crossOrigin="anonymous"
+                    autoPlay={this.props.visible }
+                    >
                     <source src={content.video.src} type="video/mp4" />
                     <ControlBar autoHide={false} className="my-class">
                         <VolumeMenuButton order={1.1} vertical={true} />

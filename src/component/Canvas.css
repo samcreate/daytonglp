@@ -1,8 +1,0 @@
-@font-face {
-    font-family: 'SegoeUI';
-    src: url('../SegoeUI-Light.woff2') format('woff2'),
-        url('../SegoeUI-Light.woff') format('woff');
-    font-weight: 300;
-    font-style: normal;
-    letter-spacing: 6px;
-}

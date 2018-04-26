@@ -57,6 +57,7 @@ export default class GalleryItem extends EventEmitter {
         this.text.scale.set(tmpSize);
         if (!this.timeline.isActive()){
             this.text.pos.x = (window.innerWidth - (window.innerWidth * 0.80)) - (this.text.width - (this.text.width * 0.75));
+            console.log(' this.text.pos.x', this.text.pos.x)
             this.text.x = this.text.pos.x - 100
         }
     }
@@ -65,6 +66,8 @@ export default class GalleryItem extends EventEmitter {
         this.text.alpha = 0;
         this.text.y = this.text.pos.y;
         this.text.x = this.text.x = this.text.pos.x - 100;
+        if (this.text.x < 0) this.text.x = 0;
+     
     }
 
     _animSetup(){

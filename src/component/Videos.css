@@ -1,17 +1,10 @@
-@font-face {
-  font-family: 'SegoeUI-Light';
-  src: url('../SegoeUI-Light.eot?#iefix') format('embedded-opentype'),  url('../SegoeUI-Light.woff') format('woff'), url('../SegoeUI-Light.ttf')  format('truetype'), url('../SegoeUI-Light.svg#SegoeUI-Light') format('svg');
-  font-weight: 400;
-}
-
-
 .videos{
     color: white;
     padding-bottom: 100px;
 }
 
 .videos p {
-    font-family: SegoeUI-Light !important;
+    font-family: "Segoe UI",SegoeUI,"Helvetica Neue",Helvetica,Arial,sans-serif !important;
     text-transform: uppercase;
     letter-spacing: 8px;
     font-weight: 400;
