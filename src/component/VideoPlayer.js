@@ -33,181 +33,149 @@ export default class VideoPlayer extends Component {
 
         this.state = {
             overlayVisible: false,
-            optionsIndex:NaN,
+            optionsID:null,
             coach: {
+                allPlayed: false,
                 end: {
                     copy: "Your choices determined coach's fate. Now watch the nurse's story.",
                     key: "nurse"
                 },
                 mainVideo: {
-                    played: !1,
+                    played: false,
                     title: "Coach",
                     video: {
                         lastPlayTime: 0,
+                        percentagePlayed: 0,
                         src: "https://compass-ssl.xbox.com/assets/e7/d4/e7d450f9-5930-495f-bbb8-6b9bb2dc6860.mp4?n=main.mp4",
                         button: "Be Pragmatic",
                         vtt: [{
                             kind: "subtitles",
-                            src: "https://compass-ssl.xbox.com/assets/ce/c0/cec0f5a8-90e7-4a88-84b8-6abb1eecc40d.vtt?n=sintel-en.vtt",
+                            src: "video/coach/1/vtt/coach1sintel-en.vtt",
                             srcLang: "en",
                             default: !0
-                        }, {
-                            kind: "subtitles",
-                            src: "https://compass-ssl.xbox.com/assets/72/17/7217d587-9b33-45d4-95db-5aafd399e086.vtt?n=sintel-es.vtt",
-                            srcLang: "es"
-                        }, {
-                            kind: "subtitles",
-                            src: "https://compass-ssl.xbox.com/assets/4a/12/4a12e9e7-c774-4353-8111-ab8f5257c06f.vtt?n=sintel-de.vtt",
-                            srcLang: "de"
                         }]
                     }
                 },
                 options: {
                     copy: "Coach is Infected. If he turns he endangers everyone. What do you do?",
                     content: [{
-                        played: !1,
+                        played: false,
                         title: "Coach : Pragmatic",
+                        id:'pragmatic',
                         video: {
                             lastPlayTime: 0,
+                            percentagePlayed: 0,
                             src: "https://compass-ssl.xbox.com/assets/64/b8/64b8ca5d-1616-474d-95de-5f1009050b7a.mp4?n=pragmatic.mp4",
                             button: "Be Pragmatic",
                             copy: "You chose pragmatic and sacrificed coach. What if you had been compassionate?",
                             vtt: [{
                                 kind: "subtitles",
-                                src: "https://compass-ssl.xbox.com/assets/59/86/5986decc-1186-40a4-8f7e-662360a3b2e4.vtt?n=coach3sintel-en.vtt",
+                                src: "video/coach/3/vtt/coach3sintel-en.vtt",
                                 srcLang: "en",
-                                default: !0
-                            }, {
-                                kind: "subtitles",
-                                src: "https://compass-ssl.xbox.com/assets/0d/99/0d99505a-e137-425f-bc65-823ad5547371.vtt?n=coach3sintel-es.vtt",
-                                srcLang: "es"
-                            }, {
-                                kind: "subtitles",
-                                src: "https://compass-ssl.xbox.com/assets/ce/db/cedb510d-538e-4de2-b70a-ab8a8f5af3c7.vtt?n=coach3sintel-de.vtt",
-                                srcLang: "de"
+                                default: true
                             }]
                         }
                     }, {
-                        played: !1,
+                        played: false,
                         title: "Coach : Compassionate",
+                        id: 'compassionate',
                         video: {
                             lastPlayTime: 0,
+                            percentagePlayed: 0,
                             src: "https://compass-ssl.xbox.com/assets/2d/f6/2df64d39-6fcc-486e-96cd-97f6fd2784fa.mp4?n=compassion.mp4",
                             button: "Be Compassionate",
                             copy: "You chose compassion and saved coach. What if you had been pragmatic?",
                             vtt: [{
                                 kind: "subtitles",
-                                src: "https://compass-ssl.xbox.com/assets/ae/f5/aef577ba-fc91-46fe-8326-fa046a1a67bc.vtt?n=coach2sintel-en.vtt",
+                                src: "video/coach/2/vtt/coach2sintel-en.vtt",
                                 srcLang: "en",
-                                default: !0
-                            }, {
-                                kind: "subtitles",
-                                src: "https://compass-ssl.xbox.com/assets/24/23/242375a1-1c3c-4820-9f8d-a3cee31b7d35.vtt?n=coach2sintel-es.vtt",
-                                srcLang: "es"
-                            }, {
-                                kind: "subtitles",
-                                src: "https://compass-ssl.xbox.com/assets/d5/07/d5076245-5198-4849-8a67-08db513e145b.vtt?n=coach2sintel-de.vtt",
-                                srcLang: "de"
+                                default: true
                             }]
                         }
                     }]
                 }
             },
             nurse: {
+                allPlayed: false,
                 end: {
                     copy: "Your choices determined Nurse's fate. Now watch the coach's story.",
                     key: "coach"
                 },
                 mainVideo: {
-                    played: !1,
+                    played: false,
                     title: "Nurse",
                     video: {
                         lastPlayTime: 0,
+                        percentagePlayed: 0,
                         src: "https://compass-ssl.xbox.com/assets/8d/47/8d479b06-34fd-4c8c-a59f-bbb956bf66d8.mp4?n=nursemain.mp4",
                         vtt: [{
                             kind: "subtitles",
-                            src: "https://compass-ssl.xbox.com/assets/36/02/3602b1cb-531f-4c6c-b149-3737116c3a6f.vtt?n=nurse1sintel-en.vtt",
+                            src: "video/nurse/1/vtt/nurse1sintel-en.vtt",
                             srcLang: "en",
-                            default: !0
-                        }, {
-                            kind: "subtitles",
-                            src: "https://compass-ssl.xbox.com/assets/d6/1e/d61e5d05-0583-4b5c-a88d-71db30679bb7.vtt?n=nurse1sintel-es.vtt",
-                            srcLang: "es"
-                        }, {
-                            kind: "subtitles",
-                            src: "https://compass-ssl.xbox.com/assets/b1/de/b1ded8da-c149-4d90-b677-62a7db2e61eb.vtt?n=nurse1sintel-de.vtt",
-                            srcLang: "de"
+                            default: true
                         }]
                     }
                 },
                 options: {
                     copy: "NURSE'S CAMP HAS BEEN RAIDED. SHE MUST ACT TO SAVE HER COMMUNITY. what do you do?",
                     content: [{
-                        played: !1,
+                        played: false,
                         title: "Nurse : BE DARING",
+                        id: 'daring',
                         video: {
                             lastPlayTime: 0,
+                            percentagePlayed: 0,
                             src: "https://compass-ssl.xbox.com/assets/26/58/265830d9-77c2-458b-aa78-b44d62994507.mp4?n=daring.mp4",
                             button: "BE DARING",
                             copy: "You chose TO BE DARING and THE NURSE LOST HER LIFE. What if you had been PRUDENT?",
                             vtt: [{
                                 kind: "subtitles",
-                                src: "https://compass-ssl.xbox.com/assets/5a/a2/5aa2bf10-be40-4b25-b5a6-a62093a18015.vtt?n=nurse2sintel-en.vtt",
+                                src: "video/nurse/2/vtt/nurse2sintel-en.vtt",
                                 srcLang: "en",
-                                default: !0
-                            }, {
-                                kind: "subtitles",
-                                src: "https://compass-ssl.xbox.com/assets/e8/43/e843ad9f-00aa-4b4b-8c57-50db84938892.vtt?n=nurse2sintel-es.vtt",
-                                srcLang: "es"
-                            }, {
-                                kind: "subtitles",
-                                src: "https://compass-ssl.xbox.com/assets/50/2f/502fd080-3285-4d8f-9e28-3bea61472dd3.vtt?n=nurse2sintel-de.vtt",
-                                srcLang: "de"
+                                default: true
                             }]
                         }
                     }, {
-                        played: !1,
+                        played: false,
                         title: "Nurse : PRUDENT",
+                        id: 'prudent',
                         video: {
                             lastPlayTime: 0,
+                            percentagePlayed: 0,
                             src: "https://compass-ssl.xbox.com/assets/8d/de/8ddea03b-40d9-4f8a-a430-ead8107ea753.mp4?n=prudent.mp4",
                             button: "Be PRUDENT",
                             copy: "You chose to be prudent and joined another community. What if you had been daring?",
                             vtt: [{
                                 kind: "subtitles",
-                                src: "https://compass-ssl.xbox.com/assets/84/8c/848c9939-bbb2-428f-afaf-b1c64f0dd1fb.vtt?n=nurse3sintel-en.vtt",
+                                src: "video/nurse/3/vtt/nurse3sintel-en.vtt",
                                 srcLang: "en",
-                                default: !0
-                            }, {
-                                kind: "subtitles",
-                                src: "https://compass-ssl.xbox.com/assets/82/ec/82ec5b0a-0a2e-4b57-ad77-781acc00b9b2.vtt?n=nurse3sintel-es.vtt",
-                                srcLang: "es"
-                            }, {
-                                kind: "subtitles",
-                                src: "https://compass-ssl.xbox.com/assets/34/4d/344d22c9-900e-4145-8f4b-7e9d06e01b0e.vtt?n=nurse3sintel-de.vtt",
-                                srcLang: "de"
+                                default: true
                             }]
                         }
                     }]
                 }
             }
-        }
+        };
+
+        this.inital_state = this.state;
+        window.state = this.state;
      
     }
 
     handleStateChange(state, test) {
-        //console.log('VIDEO PLAYBACK TIME', state);
+       // console.log('VIDEO PLAYBACK TIME',);
+        let percentage = Math.floor((state.currentTime / state.duration) * 100);
         if (state.ended && this.eventTrigger === false) {
             //console.log('VIDEO ENDED');
             this.eventTrigger = true;
             this.handleVideoEnd();
         } else if(this.eventTrigger === false){
-            this.setStatesPlaybackTime(state.currentTime);
+            this.setStatesPlaybackTime(state.currentTime, percentage);
         }
 
     }
 
-    handleVideoEnd(){
+    handleVideoEnd(timeout = 100){
         let { content, id } = this.getVideoState(this.props.videoKey);
         content.played = true;
         this.refs.player.pause();
@@ -215,13 +183,14 @@ export default class VideoPlayer extends Component {
         this.refs.videoOverlay.style.display = 'block';
         setTimeout(() => {
             this.refs.videoOverlay.style.opacity = '1';
-        }, 100);
+        }, timeout);
         
     }
 
-    setStatesPlaybackTime(time) {
+    setStatesPlaybackTime(time, percentage) {
         let { content, id } = this.getVideoState(this.props.videoKey);
         content.video.lastPlayTime = time;
+        content.video.percentagePlayed = percentage;
         this.setVideoState(content, id);
     }
 
@@ -239,7 +208,10 @@ export default class VideoPlayer extends Component {
         let options = [];
         let vidState = this.state[key];
         vidState.options.content.forEach((video, index) => {
-            if (!video.played && index !== this.state.optionsIndex){
+            ;
+            if (!video.played && video.id !== this.state.optionsID){
+                video.index = index;
+                //console.log('getOptions() -> index: ', index, ', optionsID: ', this.state.optionsID)
                 options.push(video);
             } 
         });
@@ -254,7 +226,7 @@ export default class VideoPlayer extends Component {
             this.state[this.props.videoKey].mainVideo = content;
         }
         
-        if (!isNaN(id)){
+        if (this.state.optionsID !== null ){
             // eslint-disable-next-line
             this.state[this.props.videoKey].options.content[id] = content;
             
@@ -267,17 +239,23 @@ export default class VideoPlayer extends Component {
         let videoSet = this.state[key];
         let options = this.getOptions(key);
         //check if main video has been played
-        //console.log(key, videoSet.mainVideo.played, 'isNaN(this.state.optionsIndex): ', isNaN(this.state.optionsIndex));
-        if (!videoSet.mainVideo.played || isNaN(this.state.optionsIndex) ){
+        //console.log(key, videoSet.mainVideo.played, 'isNaN(this.state.optionsID): ', isNaN(this.state.optionsID));
+        if (!videoSet.mainVideo.played || this.state.optionsID === null ){
             return { content: videoSet.mainVideo, id: 'mainVideo', options, optionsCopy: videoSet.options.copy, autoPlay: true };
         } else{
-            //console.log('get video state: ', this.props.videoKey, this.state.optionsIndex)
+            console.log('get video state: ', this.props.videoKey, this.state.optionsID)
             // eslint-disable-next-line
+            let tmpContent;
+            videoSet.options.content.forEach(element => {
+                if (element.id === this.state.optionsID){
+                    tmpContent = element
+                }
+            });
            return { 
-                content: this.state[this.props.videoKey].options.content[this.state.optionsIndex],
-                id: 0, 
-                options, 
-                optionsCopy: this.state[this.props.videoKey].options.content[this.state.optionsIndex].video.copy,
+                content: tmpContent,
+                options,
+                id: this.state.optionsID,
+                optionsCopy: tmpContent.video.copy,
                 autoPlay: true
             };
         }
@@ -297,11 +275,10 @@ export default class VideoPlayer extends Component {
     }
 
     nextVideo(index, e){
-        console.log(arguments);
         if (e) e.preventDefault();
-        //console.log('nextVideo', index)
+        console.log('nextVideo() -> index:', index)
         // eslint-disable-next-line
-        this.state.optionsIndex = index;
+        this.state.optionsID = index;
         this.eventTrigger = false;
         this.hideOverlay();
         this.forceUpdate();
@@ -314,11 +291,22 @@ export default class VideoPlayer extends Component {
 
     playOtherVideoSeries(key, e){
         e.preventDefault();
+        if (this.state.coach.allPlayed && this.state.nurse.allPlayed){
+            console.log('reset state')
+            this.setState(this.inital_state);
+        }
         // eslint-disable-next-line
-        this.state.optionsIndex = NaN;
+        this.state.optionsID = null;
         this.props.parent.handleVideo(key);
         this.eventTrigger = false;
         this.hideOverlay();
+        if(key === 'nurse'){
+            // eslint-disable-next-line
+            this.state.coach.allPlayed = true;
+        }else{
+            // eslint-disable-next-line
+            this.state.nurse.allPlayed = true;
+        }
          
     }
 
@@ -343,8 +331,15 @@ export default class VideoPlayer extends Component {
 
         let { content, options, optionsCopy} = this.getVideoState(this.props.videoKey);
         let optionsHtml;
-        //console.log('render: -->',{ content, options, optionsCopy});
+        let autoPlay = this.props.visible;
         
+        if (content.video.percentagePlayed !== 0 && content.video.percentagePlayed > 95){
+            autoPlay = false;
+            this.handleVideoEnd(1000);
+        }
+        
+        console.log('render()-> options.length', options.length);
+        console.log('render()-> content to play', content.title)
         if (options.length === 0){
             //no options, show other story 
             optionsHtml = (
@@ -372,40 +367,25 @@ export default class VideoPlayer extends Component {
                 </div>
             );
         } else if (options.length === 1) {
-            if(this.state.optionsIndex === 0){
-                optionsHtml = (
+            console.log('render() -> this.state.optionsID', this.state.optionsID, options)
+            //one option left
+            optionsHtml = (
+                <div data-grid="col-12">
                     <div data-grid="col-12">
-                        <div data-grid="col-12">
-                            <div data-grid="col-3"></div>
-                            <p data-grid="col-6">
-                                {optionsCopy}
-                            </p>
-                            <div data-grid="col-3"></div>
-                        </div>
-                        <div data-grid="col-12">
-                            < a href={'#' + options[0].video.button} onClick={this.nextVideo.bind(this, 1)} aria-labelledby={options[0].video.button}>{options[0].video.button} </a>
-                        </div>
+                        <div data-grid="col-3"></div>
+                        <p data-grid="col-6">
+                            {optionsCopy}
+                        </p>
+                        <div data-grid="col-3"></div>
                     </div>
-                );
-
-            } else {
-                optionsHtml = (
                     <div data-grid="col-12">
-                        <div data-grid="col-12">
-                            <div data-grid="col-3"></div>
-                            <p data-grid="col-6">
-                                {optionsCopy}
-                            </p>
-                            <div data-grid="col-3"></div>
-                        </div>
-                        <div data-grid="col-12">
-                            < a href={'#' + options[0].video.button} onClick={this.nextVideo.bind(this, 1)} aria-labelledby={options[0].video.button}>{options[0].video.button} </a>
-                        </div>
+                        < a href={'#' + options[0].video.button} onClick={this.nextVideo.bind(this, options[0].id)} aria-labelledby={options[0].video.button}>{options[0].video.button} </a>
                     </div>
-                );
-            }
+                </div>
+            );
             
         } else if (options.length === 2){
+            //alll options are on the table
             optionsHtml = (
                 <div data-grid="col-12">
                     <div data-grid="col-12">
@@ -416,7 +396,7 @@ export default class VideoPlayer extends Component {
                         <div data-grid="col-3"></div>
                     </div>
                     <div data-grid="col-5">
-                        < a href={'#' + options[0].video.button} onClick={this.nextVideo.bind(this, 0)} aria-labelledby={options[0].video.button}>{options[0].video.button} </a>
+                        < a href={'#' + options[0].video.button} onClick={this.nextVideo.bind(this, options[0].id)} aria-labelledby={options[0].video.button}>{options[0].video.button} </a>
                     </div>
                     <div data-grid="col-2">
                         <p className="or">
@@ -424,7 +404,7 @@ export default class VideoPlayer extends Component {
                         </p>
                     </div>
                     <div data-grid="col-5">
-                        < a href={'#' + options[1].video.button} onClick={this.nextVideo.bind(this, 1)} aria-labelledby={options[0].video.button}>{options[1].video.button} </a>
+                        < a href={'#' + options[1].video.button} onClick={this.nextVideo.bind(this, options[1].id)} aria-labelledby={options[1].video.button}>{options[1].video.button} </a>
                     </div>
                 </div>
             );
@@ -438,26 +418,22 @@ export default class VideoPlayer extends Component {
                     playsInline={false}
                     startTime={content.video.lastPlayTime}
                     ref="player"
-                    crossOrigin="anonymous"
-                    autoPlay={this.props.visible }
+                    autoPlay={autoPlay}
                     >
                     <source src={content.video.src} type="video/mp4" />
-                    <ControlBar autoHide={false} className="my-class">
+                    <ControlBar autoHide={true} className="my-class">
                         <VolumeMenuButton order={1.1} vertical={true} />
                         <CurrentTimeDisplay order={4.1} />
                         <TimeDivider order={4.2} />
                         <CCButton className="cc-button" order={7.1} parent={this} />
                     </ControlBar>
                     <track label="English" kind="subtitles" srcLang="en" src={content.video.vtt[0].src} ref="engSub" />
-                    <track label="Deutsch" kind="subtitles" srcLang="de" src={content.video.vtt[1].src} />
-                    <track label="Español" kind="subtitles" srcLang="es" src={content.video.vtt[2].src} />
                     <div id="vid-overlay" ref="videoOverlay" data-grid="container" style={{ display: 'none'}}>
                         <div data-grid="col-12 pad-6x" className="opt-content">
                             {optionsHtml}
                         </div>
                     </div>
                 </Player>
-                
             </div>
         );
     }

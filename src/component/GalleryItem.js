@@ -57,7 +57,6 @@ export default class GalleryItem extends EventEmitter {
         this.text.scale.set(tmpSize);
         if (!this.timeline.isActive()){
             this.text.pos.x = (window.innerWidth - (window.innerWidth * 0.80)) - (this.text.width - (this.text.width * 0.75));
-            console.log(' this.text.pos.x', this.text.pos.x)
             this.text.x = this.text.pos.x - 100
         }
     }
@@ -74,8 +73,8 @@ export default class GalleryItem extends EventEmitter {
         //this.text.pos
         this.timeline
             .to(this.text, 10, { x: this.text.pos.x, alpha: 1, ease: Sine.easeOut, delay: 0.3 }, 'gall')
-            .to(this.image.scale, 10, { x: 1.3, y: 1.3, ease: Sine.easeOut }, 'gall')
-            .to(this.image, 10, { y: '-=20', ease: Sine.easeOut }, 'gall')
+            .to(this.image.scale, 10, { x: 1.4, y: 1.4, ease: Sine.easeOut }, 'gall')
+            .to(this.image, 10, { y: '-=40', ease: Sine.easeOut }, 'gall')
             .to(this.text, 10, { alpha: 0, ease: Sine.easeOut }, '-=6.5')
     }
 

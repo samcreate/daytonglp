@@ -49,6 +49,7 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    display: none;
 }
 
 .video-react-volume-menu-button-vertical .video-react-menu{
@@ -63,6 +64,15 @@
 
 .cc-button:hover, .cc-button.active{
   opacity: 1;
+}
+
+.videoComponent .social{
+  display: block;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background-color: #0000ff;
+  text-indent: -9999px;
 }
 
 @media (max-width: 790px){

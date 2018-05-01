@@ -75,7 +75,7 @@ class Videos extends Component {
            
             <div data-grid="container" role="main" className="videos">
                 <section data-grid="col-12" className="videoHolder">
-                    <div ref="videoComponent" className="videoComponent" data-grid="col-11">
+                    <div ref="videoComponent" className="videoComponent" data-grid="col-10">
                         <VideoPlayer ref="VideoPlayer" parent={this} cookies={this.props.cookies} videoKey={this.state.videoKey} visible={this.state.visible}>
                         </VideoPlayer>
                     </div>
@@ -86,22 +86,24 @@ class Videos extends Component {
                 </div>
                 <section data-grid="col-12 ">
                     <div data-grid="col-6 pad-3x" className="videoThumb coach ">
-                        <a href="#playCoach" tabIndex="0" role="listitem" aria-labelledby="Play Coach Video Series" onClick={this.handleVideo.bind(this, 'coach')}>
+                        <a href="#playCoach"  onClick={this.handleVideo.bind(this, 'coach')}>
                             <div className='rectangle-box'>
                                 <div className='rectangle-content'>
                                     <div>
-                                        <span className="c-glyph context-glyph-tile"></span>
+                                        <span aria-hidden="true" className="c-glyph context-glyph-tile"></span>
+                                        <p>Play coach video series</p>
                                     </div>
                                 </div>
                             </div>
                         </a>
                     </div>
                     <div data-grid="col-6 pad-3x" className="videoThumb nurse">
-                        <a href="#playNuse" tabIndex="0" role="listitem" aria-labelledby="Play Nurse Video Series" onClick={this.handleVideo.bind(this, 'nurse')}>
+                        <a href="#playNuse" onClick={this.handleVideo.bind(this, 'nurse')}>
                             <div className='rectangle-box'>
                                 <div className='rectangle-content'>
                                     <div>
-                                        <span className="c-glyph context-glyph-tile"></span>
+                                        <span aria-hidden="true" className="c-glyph context-glyph-tile"></span>
+                                        <p>Play Nurse Video Series</p>
                                     </div>
                                 </div>
                             </div>
