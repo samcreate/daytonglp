@@ -66,6 +66,47 @@
   opacity: 1;
 }
 
+.sb-button{
+  text-indent: -9999px;
+  opacity: 0.4;
+  transition: opacity 0.2s;
+  display: block;
+}
+
+.sb-button:hover, .sb-button.active{
+  opacity: 1;
+}
+.sbhide{
+  display: none;
+}
+
+.sbmenu{
+  position: absolute;
+  top: -57px;
+  right: 0px;
+  background: rgba(43, 51, 63, 0.7)
+}
+.sbmenu li a{
+  width: 100px;
+  padding: 8px;
+  display: block;
+  font-size: 12px;
+ 
+}
+.sbmenu li a:not(.default){
+  opacity: 0.4;
+}
+.sbmenu li a:not(.default):before{
+  content: '\E8FB';
+  visibility: hidden;
+}
+.sbmenu li a.default:before{
+  content: '\E8FB';
+  position: relative;
+  left: -9px;
+  top: 1px;
+}
+
 .videoComponent .social{
   display: block;
   width: 25px;

@@ -7,6 +7,7 @@ import _ from 'underscore';
 import './VideoPlayer.css';
 import MobileDetect from 'mobile-detect';
 import CCButton from './CCButton';
+import SettingsButton from './SettingsButton';
 export default class VideoPlayer extends Component {
 
 
@@ -32,6 +33,7 @@ export default class VideoPlayer extends Component {
         this.throttle = _.throttle(this.handleStateChange.bind(this), 500);
 
         this.state = {
+
             overlayVisible: false,
             optionsID:null,
             coach: {
@@ -48,12 +50,20 @@ export default class VideoPlayer extends Component {
                         percentagePlayed: 0,
                         src: "https://compass-ssl.xbox.com/assets/e7/d4/e7d450f9-5930-495f-bbb8-6b9bb2dc6860.mp4?n=main.mp4",
                         button: "Be Pragmatic",
-                        vtt: [{
-                            kind: "subtitles",
-                            src: "video/coach/1/vtt/coach1sintel-en.vtt",
-                            srcLang: "en",
-                            default: !0
-                        }]
+                        vtt: {
+                            en: {
+                                kind: "subtitles",
+                                src: "video/coach/1/vtt/coach1sintel-en.vtt",
+                                srcLang: "en",
+                                default: !0
+                            },
+                            fr: {
+                                kind: "subtitles",
+                                src: "video/coach/1/vtt/coach1sintel-fr.vtt",
+                                srcLang: "en",
+                                default: !0
+                            }
+                        }
                     }
                 },
                 options: {
@@ -68,12 +78,20 @@ export default class VideoPlayer extends Component {
                             src: "https://compass-ssl.xbox.com/assets/64/b8/64b8ca5d-1616-474d-95de-5f1009050b7a.mp4?n=pragmatic.mp4",
                             button: "Be Pragmatic",
                             copy: "You chose pragmatic and sacrificed coach. What if you had been compassionate?",
-                            vtt: [{
-                                kind: "subtitles",
-                                src: "video/coach/3/vtt/coach3sintel-en.vtt",
-                                srcLang: "en",
-                                default: true
-                            }]
+                            vtt: {
+                                en: {
+                                    kind: "subtitles",
+                                    src: "video/coach/3/vtt/coach3sintel-en.vtt",
+                                    srcLang: "en",
+                                    default: true
+                                },
+                                fr: {
+                                    kind: "subtitles",
+                                    src: "video/coach/3/vtt/coach3sintel-fr.vtt",
+                                    srcLang: "en",
+                                    default: true
+                                }
+                            }
                         }
                     }, {
                         played: false,
@@ -85,12 +103,20 @@ export default class VideoPlayer extends Component {
                             src: "https://compass-ssl.xbox.com/assets/2d/f6/2df64d39-6fcc-486e-96cd-97f6fd2784fa.mp4?n=compassion.mp4",
                             button: "Be Compassionate",
                             copy: "You chose compassion and saved coach. What if you had been pragmatic?",
-                            vtt: [{
-                                kind: "subtitles",
-                                src: "video/coach/2/vtt/coach2sintel-en.vtt",
-                                srcLang: "en",
-                                default: true
-                            }]
+                            vtt: {
+                                en: {
+                                    kind: "subtitles",
+                                    src: "video/coach/2/vtt/coach2sintel-en.vtt",
+                                    srcLang: "en",
+                                    default: true
+                                },
+                                fr: {
+                                    kind: "subtitles",
+                                    src: "video/coach/2/vtt/coach2sintel-fr.vtt",
+                                    srcLang: "en",
+                                    default: true
+                                }
+                            }
                         }
                     }]
                 }
@@ -108,12 +134,20 @@ export default class VideoPlayer extends Component {
                         lastPlayTime: 0,
                         percentagePlayed: 0,
                         src: "https://compass-ssl.xbox.com/assets/8d/47/8d479b06-34fd-4c8c-a59f-bbb956bf66d8.mp4?n=nursemain.mp4",
-                        vtt: [{
-                            kind: "subtitles",
-                            src: "video/nurse/1/vtt/nurse1sintel-en.vtt",
-                            srcLang: "en",
-                            default: true
-                        }]
+                        vtt: {
+                            en: {
+                                kind: "subtitles",
+                                src: "video/nurse/1/vtt/nurse1sintel-en.vtt",
+                                srcLang: "en",
+                                default: true
+                            },
+                            fr: {
+                                kind: "subtitles",
+                                src: "video/nurse/1/vtt/nurse1sintel-fr.vtt",
+                                srcLang: "en",
+                                default: true
+                            }
+                        }
                     }
                 },
                 options: {
@@ -128,12 +162,20 @@ export default class VideoPlayer extends Component {
                             src: "https://compass-ssl.xbox.com/assets/26/58/265830d9-77c2-458b-aa78-b44d62994507.mp4?n=daring.mp4",
                             button: "BE DARING",
                             copy: "You chose TO BE DARING and THE NURSE LOST HER LIFE. What if you had been PRUDENT?",
-                            vtt: [{
-                                kind: "subtitles",
-                                src: "video/nurse/2/vtt/nurse2sintel-en.vtt",
-                                srcLang: "en",
-                                default: true
-                            }]
+                            vtt: {
+                                en: {
+                                    kind: "subtitles",
+                                    src: "video/nurse/2/vtt/nurse2sintel-en.vtt",
+                                    srcLang: "en",
+                                    default: true
+                                },
+                                fr: {
+                                    kind: "subtitles",
+                                    src: "video/nurse/2/vtt/nurse2sintel-fr.vtt",
+                                    srcLang: "en",
+                                    default: true
+                                }
+                            }
                         }
                     }, {
                         played: false,
@@ -145,12 +187,20 @@ export default class VideoPlayer extends Component {
                             src: "https://compass-ssl.xbox.com/assets/8d/de/8ddea03b-40d9-4f8a-a430-ead8107ea753.mp4?n=prudent.mp4",
                             button: "Be PRUDENT",
                             copy: "You chose to be prudent and joined another community. What if you had been daring?",
-                            vtt: [{
-                                kind: "subtitles",
-                                src: "video/nurse/3/vtt/nurse3sintel-en.vtt",
-                                srcLang: "en",
-                                default: true
-                            }]
+                            vtt: {
+                                en: {
+                                    kind: "subtitles",
+                                    src: "video/nurse/3/vtt/nurse3sintel-en.vtt",
+                                    srcLang: "en",
+                                    default: true
+                                },
+                                fr: {
+                                    kind: "subtitles",
+                                    src: "video/nurse/3/vtt/nurse3sintel-fr.vtt",
+                                    srcLang: "en",
+                                    default: true
+                                }
+                            }
                         }
                     }]
                 }
@@ -243,7 +293,6 @@ export default class VideoPlayer extends Component {
         if (!videoSet.mainVideo.played || this.state.optionsID === null ){
             return { content: videoSet.mainVideo, id: 'mainVideo', options, optionsCopy: videoSet.options.copy, autoPlay: true };
         } else{
-            console.log('get video state: ', this.props.videoKey, this.state.optionsID)
             // eslint-disable-next-line
             let tmpContent;
             videoSet.options.content.forEach(element => {
@@ -276,7 +325,6 @@ export default class VideoPlayer extends Component {
 
     nextVideo(index, e){
         if (e) e.preventDefault();
-        console.log('nextVideo() -> index:', index)
         // eslint-disable-next-line
         this.state.optionsID = index;
         this.eventTrigger = false;
@@ -326,6 +374,23 @@ export default class VideoPlayer extends Component {
         }
     }
 
+    setLanguage(lang){
+
+        this.refs['enSub'].removeAttribute("default");
+        this.refs['frSub'].removeAttribute("default");
+        this.refs[lang + 'Sub'].setAttribute("default", "true");
+        let thisTracks = [this.refs.player.video.video.textTracks[0], this.refs.player.video.video.textTracks[1]];
+
+        
+        thisTracks.forEach(track => {
+            track.mode = 'disabled';
+            if (track.language === lang){
+                track.mode = 'showing';
+            }
+        });
+
+    }
+
     render() {
 
 
@@ -338,8 +403,7 @@ export default class VideoPlayer extends Component {
             this.handleVideoEnd(1000);
         }
         
-        console.log('render()-> options.length', options.length);
-        console.log('render()-> content to play', content.title)
+        
         if (options.length === 0){
             //no options, show other story 
             optionsHtml = (
@@ -367,7 +431,6 @@ export default class VideoPlayer extends Component {
                 </div>
             );
         } else if (options.length === 1) {
-            console.log('render() -> this.state.optionsID', this.state.optionsID, options)
             //one option left
             optionsHtml = (
                 <div data-grid="col-12">
@@ -421,13 +484,15 @@ export default class VideoPlayer extends Component {
                     autoPlay={autoPlay}
                     >
                     <source src={content.video.src} type="video/mp4" />
-                    <ControlBar autoHide={true} className="my-class">
+                    <ControlBar autoHide={false} className="my-class">
                         <VolumeMenuButton order={1.1} vertical={true} />
                         <CurrentTimeDisplay order={4.1} />
                         <TimeDivider order={4.2} />
                         <CCButton className="cc-button" order={7.1} parent={this} />
+                        <SettingsButton className="sb-button" order={7.2} parent={this} />
                     </ControlBar>
-                    <track label="English" kind="subtitles" srcLang="en" src={content.video.vtt[0].src} ref="engSub" />
+                    <track label="English" kind="subtitles" srcLang="en" src={content.video.vtt.en.src} ref="enSub" default="true" />
+                    <track label="French" kind="subtitles" srcLang="fr" src={content.video.vtt.fr.src} ref="frSub" />
                     <div id="vid-overlay" ref="videoOverlay" data-grid="container" style={{ display: 'none'}}>
                         <div data-grid="col-12 pad-6x" className="opt-content">
                             {optionsHtml}
