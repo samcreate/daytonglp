@@ -3,7 +3,7 @@ import {Player, ControlBar, CurrentTimeDisplay, TimeDivider, VolumeMenuButton } 
 import '../../node_modules/video-react/dist/video-react.css';
 import {  Cookies } from 'react-cookie';
 import { instanceOf, string, bool} from 'prop-types';
-import _ from 'underscore';
+import _ from 'lodash';
 import './VideoPlayer.css';
 import MobileDetect from 'mobile-detect';
 import CCButton from './CCButton';
@@ -30,12 +30,15 @@ export default class VideoPlayer extends Component {
 
         this.eventTrigger = false;
 
+        this.forceStop = false;
+
         this.throttle = _.throttle(this.handleStateChange.bind(this), 500);
 
         this.state = {
-
+            subTitleIndex: 0,
             overlayVisible: false,
             optionsID:null,
+            finish: false,
             coach: {
                 allPlayed: false,
                 end: {
@@ -53,13 +56,13 @@ export default class VideoPlayer extends Component {
                         vtt: {
                             en: {
                                 kind: "subtitles",
-                                src: "video/coach/1/vtt/coach1sintel-en.vtt",
+                                src: "video/vtt/coach1sintel-en.vtt",
                                 srcLang: "en",
                                 default: !0
                             },
                             fr: {
                                 kind: "subtitles",
-                                src: "video/coach/1/vtt/coach1sintel-fr.vtt",
+                                src: "video/vtt/coach1sintel-fr.vtt",
                                 srcLang: "en",
                                 default: !0
                             }
@@ -81,13 +84,13 @@ export default class VideoPlayer extends Component {
                             vtt: {
                                 en: {
                                     kind: "subtitles",
-                                    src: "video/coach/3/vtt/coach3sintel-en.vtt",
+                                    src: "video/vtt/coach3sintel-prag-en.vtt",
                                     srcLang: "en",
                                     default: true
                                 },
                                 fr: {
                                     kind: "subtitles",
-                                    src: "video/coach/3/vtt/coach3sintel-fr.vtt",
+                                    src: "video/vtt/coach3sintel-prag-fr.vtt",
                                     srcLang: "en",
                                     default: true
                                 }
@@ -106,13 +109,13 @@ export default class VideoPlayer extends Component {
                             vtt: {
                                 en: {
                                     kind: "subtitles",
-                                    src: "video/coach/2/vtt/coach2sintel-en.vtt",
+                                    src: "video/vtt/coach2sintel-compassion-en.vtt",
                                     srcLang: "en",
                                     default: true
                                 },
                                 fr: {
                                     kind: "subtitles",
-                                    src: "video/coach/2/vtt/coach2sintel-fr.vtt",
+                                    src: "video/vtt/coach2sintel-compassion-fr.vtt",
                                     srcLang: "en",
                                     default: true
                                 }
@@ -137,13 +140,13 @@ export default class VideoPlayer extends Component {
                         vtt: {
                             en: {
                                 kind: "subtitles",
-                                src: "video/nurse/1/vtt/nurse1sintel-en.vtt",
+                                src: "video/vtt/nurse1sintel-en.vtt",
                                 srcLang: "en",
                                 default: true
                             },
                             fr: {
                                 kind: "subtitles",
-                                src: "video/nurse/1/vtt/nurse1sintel-fr.vtt",
+                                src: "video/vtt/nurse1sintel-fr.vtt",
                                 srcLang: "en",
                                 default: true
                             }
@@ -165,13 +168,13 @@ export default class VideoPlayer extends Component {
                             vtt: {
                                 en: {
                                     kind: "subtitles",
-                                    src: "video/nurse/2/vtt/nurse2sintel-en.vtt",
+                                    src: "video/vtt/nurse2sintel-daring-en.vtt",
                                     srcLang: "en",
                                     default: true
                                 },
                                 fr: {
                                     kind: "subtitles",
-                                    src: "video/nurse/2/vtt/nurse2sintel-fr.vtt",
+                                    src: "video/vtt/nurse2sintel-daring-fr.vtt",
                                     srcLang: "en",
                                     default: true
                                 }
@@ -190,13 +193,13 @@ export default class VideoPlayer extends Component {
                             vtt: {
                                 en: {
                                     kind: "subtitles",
-                                    src: "video/nurse/3/vtt/nurse3sintel-en.vtt",
+                                    src: "video/vtt/nurse3sintel-prudent-en.vtt",
                                     srcLang: "en",
                                     default: true
                                 },
                                 fr: {
                                     kind: "subtitles",
-                                    src: "video/nurse/3/vtt/nurse3sintel-fr.vtt",
+                                    src: "video/vtt/nurse3sintel-prudent-fr.vtt",
                                     srcLang: "en",
                                     default: true
                                 }
@@ -206,19 +209,21 @@ export default class VideoPlayer extends Component {
                 }
             }
         };
+        
+        this.inital_state = _.cloneDeep(this.state);
 
-        this.inital_state = this.state;
-        window.state = this.state;
+        window.app = this;
      
     }
 
     handleStateChange(state, test) {
        // console.log('VIDEO PLAYBACK TIME',);
+        if(this.forceStop) return;
         let percentage = Math.floor((state.currentTime / state.duration) * 100);
-        if (state.ended && this.eventTrigger === false) {
-            //console.log('VIDEO ENDED');
+        if (state.ended && this.eventTrigger === false && this.props.visible) {
+            // console.log('VIDEO ENDED', state.currentSrc.split('?')[1]);
             this.eventTrigger = true;
-            this.handleVideoEnd();
+            // this.handleVideoEnd();
         } else if(this.eventTrigger === false){
             this.setStatesPlaybackTime(state.currentTime, percentage);
         }
@@ -226,6 +231,8 @@ export default class VideoPlayer extends Component {
     }
 
     handleVideoEnd(timeout = 100){
+
+
         let { content, id } = this.getVideoState(this.props.videoKey);
         content.played = true;
         this.refs.player.pause();
@@ -234,6 +241,39 @@ export default class VideoPlayer extends Component {
         setTimeout(() => {
             this.refs.videoOverlay.style.opacity = '1';
         }, timeout);
+
+        
+        
+    }
+
+    checkToReset(){
+        let closerup = true;
+
+        this.state.coach.options.content.forEach(vid => {
+            if (!vid.played){
+                closerup = false;
+            }
+        });
+
+        this.state.nurse.options.content.forEach(vid => {
+            if (!vid.played) {
+                closerup = false;
+            }
+        });
+
+        if (!this.state.coach.mainVideo.played || !this.state.nurse.mainVideo.played){
+            closerup = false;
+        }
+
+        if(closerup){
+            this.eventTrigger = true;
+
+        
+            // this.setState({ finish: true});
+
+            this.reset();
+      
+        }
         
     }
 
@@ -246,12 +286,21 @@ export default class VideoPlayer extends Component {
 
 
     componentDidUpdate(prevProps, prevState) {
+
+        
+
         if(this.props.visible){
             this.refs.player.load();
             //console.log('player loaded and played')
         }
-
+        this.refs.player.video.video.onended = this.handleVideoEnd.bind(this);
         this.refs.player.subscribeToStateChange(this.throttle);
+        this.refs.player.video.video.focus();
+        document.getElementsByClassName("video-react")[0].focus();
+        
+        setTimeout(() => {
+            this.forceStop = false;
+        }, 500);
     }
 
     getOptions(key){
@@ -300,6 +349,14 @@ export default class VideoPlayer extends Component {
                     tmpContent = element
                 }
             });
+
+            if (tmpContent === undefined){
+
+                videoSet.mainVideo.video.lastPlayTime = 0;
+                videoSet.mainVideo.video.percentagePlayed = 0;
+                return { content: videoSet.mainVideo, id: 'mainVideo', options, optionsCopy: videoSet.options.copy, autoPlay: false };
+            }
+            
            return { 
                 content: tmpContent,
                 options,
@@ -311,25 +368,29 @@ export default class VideoPlayer extends Component {
     }
 
     closeVideo(comingFromParent){
-        
         this.setState({
             visible: false
         });
         this.refs.player.pause();
         this.eventTrigger = false;
+        this.hideOverlay();
         if (comingFromParent !== true){
             this.props.parent.closeVideo();
             comingFromParent.preventDefault();
         }
+        
     }
 
     nextVideo(index, e){
         if (e) e.preventDefault();
         // eslint-disable-next-line
-        this.state.optionsID = index;
-        this.eventTrigger = false;
+        //this.state.optionsID = index;
+        this.forceStop = true;
         this.hideOverlay();
-        this.forceUpdate();
+        this.setState({ optionsID: index});
+        this.eventTrigger = false;
+        
+        //this.forceUpdate();
     }
 
     hideOverlay(){
@@ -339,12 +400,10 @@ export default class VideoPlayer extends Component {
 
     playOtherVideoSeries(key, e){
         e.preventDefault();
-        if (this.state.coach.allPlayed && this.state.nurse.allPlayed){
-            console.log('reset state')
-            this.setState(this.inital_state);
-        }
+        
         // eslint-disable-next-line
         this.state.optionsID = null;
+        this.forceStop = true;
         this.props.parent.handleVideo(key);
         this.eventTrigger = false;
         this.hideOverlay();
@@ -355,7 +414,16 @@ export default class VideoPlayer extends Component {
             // eslint-disable-next-line
             this.state.nurse.allPlayed = true;
         }
-         
+        this.checkToReset();
+    }
+
+    reset(e){
+        //e.preventDefault();
+        //this.hideOverlay();
+        this.setState(_.cloneDeep(this.inital_state));
+        this.refs.player.load();
+        //this.props.parent.closeVideo();
+        this.eventTrigger = false;
     }
 
     componentDidMount() {
@@ -364,13 +432,18 @@ export default class VideoPlayer extends Component {
             this.refs.videoContainer.style.height = window.innerHeight + 'px';
             this.refs.videoContainer.style.overflowY = "auto";
         }
+        
+        this.refs.player.video.video.focus();
     }
 
     ccToggle(on){
         if(on){
-            this.refs.player.video.video.textTracks[0].mode = "showing";
+            this.refs.player.video.video.textTracks[this.state.subTitleIndex].mode = "showing";
+
         } else {
-            this.refs.player.video.video.textTracks[0].mode = "hidden";
+            this.refs.player.video.video.textTracks[this.state.subTitleIndex].mode = "hidden";
+            this.refs['enSub'].removeAttribute("default");
+            this.refs['frSub'].removeAttribute("default");
         }
     }
 
@@ -389,6 +462,12 @@ export default class VideoPlayer extends Component {
             }
         });
 
+        if(lang === 'en'){
+            this.state.subTitleIndex = 0;
+        }else{
+            this.state.subTitleIndex = 1;
+        }
+
     }
 
     render() {
@@ -398,10 +477,11 @@ export default class VideoPlayer extends Component {
         let optionsHtml;
         let autoPlay = this.props.visible;
         
-        if (content.video.percentagePlayed !== 0 && content.video.percentagePlayed > 95){
+        if (content.video.percentagePlayed !== 0 && content.video.percentagePlayed > 95 && this.state.finish !== true){
             autoPlay = false;
             this.handleVideoEnd(1000);
         }
+        
         
         
         if (options.length === 0){
@@ -473,6 +553,8 @@ export default class VideoPlayer extends Component {
             );
         }
 
+        //console.log('render() -> content.video.src', content.video.src.split('?')[1]);
+      
         return (
             <div className={this.props.visible ? 'visible' : 'hidden'} ref="videoContainer">
                 <h4 className="c-heading-4">{content.title}</h4>
@@ -484,15 +566,15 @@ export default class VideoPlayer extends Component {
                     autoPlay={autoPlay}
                     >
                     <source src={content.video.src} type="video/mp4" />
-                    <ControlBar autoHide={false} className="my-class">
+                    <ControlBar autoHide={true} className="my-class">
                         <VolumeMenuButton order={1.1} vertical={true} />
                         <CurrentTimeDisplay order={4.1} />
                         <TimeDivider order={4.2} />
                         <CCButton className="cc-button" order={7.1} parent={this} />
                         <SettingsButton className="sb-button" order={7.2} parent={this} />
                     </ControlBar>
-                    <track label="English" kind="subtitles" srcLang="en" src={content.video.vtt.en.src} ref="enSub" default="true" />
-                    <track label="French" kind="subtitles" srcLang="fr" src={content.video.vtt.fr.src} ref="frSub" />
+                    <track label="English" kind="subtitles" srcLang="en" src={content.video.vtt.en.src} ref="enSub" id={content.video.vtt.en.src}/>
+                    <track label="French" kind="subtitles" srcLang="fr" src={content.video.vtt.fr.src} ref="frSub" id={content.video.vtt.fr.sr} />
                     <div id="vid-overlay" ref="videoOverlay" data-grid="container" style={{ display: 'none'}}>
                         <div data-grid="col-12 pad-6x" className="opt-content">
                             {optionsHtml}

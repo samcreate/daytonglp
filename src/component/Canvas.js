@@ -5,6 +5,8 @@ import Smoke from './Smoke';
 import {  Linear, Sine, TimelineLite } from "gsap";
 import Gallery from './Gallery';
 import MobileDetect from 'mobile-detect';
+import gradient from './gradient';
+import PlayPause from './PlayPause';
 export default class Canvas extends Component {
 
     /**
@@ -51,10 +53,44 @@ export default class Canvas extends Component {
         this.survive_mobile_txt = PIXI.Sprite.fromImage(window.hwy_survive_mobile);
         this.smokeCoverUp = new PIXI.Container();
         this.smokeCoverUp.y = 0;
-        
+
+        // this.blackOut = new PIXI.Graphics();
+        // this.blackOut.beginFill(0x000000);
+        // this.blackOut.drawRect(0, 0, window.innerWidth, 800);
+        // this.blackOut.alpha = 0;
+
+        this.playPause = new PlayPause();
+
+        let gradientTexture = PIXI.Texture.fromImage(gradient);
+       
+        this.blackOut = new PIXI.extras.TilingSprite(
+            gradientTexture,
+            (this.app.width*10),
+            526
+        );
+        this.blackOut.alpha = 0;
+        this.blackOut.y =180;
+        window.blackout = gradientTexture;
         this.setupSmoke();
         this.setupGallery().next();
         this.updateDimensions();
+        this.setupTimeline();
+        this.mainLayer.addChild(this.playPause.view);
+        this.mainLayer.addChild(this.blackOut);
+        
+        this.playPause.view.x = window.innerWidth - 30;
+        this.playPause.view.y = 520;
+        this.playPause.on('paused', this.handlePause.bind(this));
+        this.paused = false;
+        
+    }
+
+    handlePause(btn, paused){
+        this.paused = paused;
+
+    
+        this.gallery.pause(paused);
+        this.smoke.pause(paused);
     }
 
     setupSmoke(){
@@ -95,18 +131,22 @@ export default class Canvas extends Component {
         this.mainLayer.addChild(this.smokeCoverUp);
         this.animation();
 
+        
+            //     this.smokeShader.uniforms.time.value = 4.878;
+       
+    }
+
+    setupTimeline(){
         this.timeline
             .to(this.topSmokeRight, 1.1, { alpha: 1, ease: Linear.easeNone }, 'whiteout')
             .to(this.topSmokeLeft, 1.1, { alpha: 1, ease: Linear.easeNone }, 'whiteout')
             .to(this.topSmokeMid, 1.1, { alpha: 1, ease: Linear.easeNone }, 'whiteout')
-            .to(this.smoke.smokeShader.uniforms.time, this.state.transitionTImeIn, { value: '+=0.875', ease: Sine.easeInOut }, 'whiteout')
-            .to(this.smoke.smokeShader.uniforms.brightness, this.state.transitionTImeIn, { value: 7, ease: Sine.easeInOut }, 'whiteout')
-            .to(this.smoke.smokeShader.uniforms.whiteness, this.state.transitionTImeIn, { value: 0.9, ease: Sine.easeInOut }, 'whiteout');
-
-            window.timeline = this.timeline;
+            .to(this.gallery.view, this.state.transitionTImeIn, { alpha: 0.6, ease: Sine.easeInOut }, 'whiteout')
+            .to(this.blackOut, this.state.transitionTImeIn, { alpha: 0.6, ease: Sine.easeInOut }, 'whiteout')
+            .to(this.smoke.smokeShader.uniforms.brightness, this.state.transitionTImeIn, { value: 6, ease: Sine.easeInOut }, 'whiteout')
+            .to(this.smoke.smokeShader.uniforms.whiteness, this.state.transitionTImeIn, { value: 1.1, ease: Sine.easeInOut }, 'whiteout');
         
-            //     this.smokeShader.uniforms.time.value = 4.878;
-       
+        window.timeline = this.timeline;
     }
 
 
@@ -141,7 +181,6 @@ export default class Canvas extends Component {
 
 
     slideStart(slide) {
-
        setTimeout(() => {
            this.smoke.smokeShader.uniforms.transr.value = slide.smokeColor.r;
            this.smoke.smokeShader.uniforms.transg.value = slide.smokeColor.g;
@@ -160,10 +199,14 @@ export default class Canvas extends Component {
     }
 
     animation(delta){
+        // if (this.paused) return false;
         requestAnimationFrame(this.animation.bind(this));
-        this.topSmokeRight.tilePosition.x += 2.1;
-        this.topSmokeLeft.tilePosition.x -= 0.4;
-        this.topSmokeMid.tilePosition.x += 1.4;
+        if(!this.paused){
+            this.topSmokeRight.tilePosition.x += 2.1;
+            this.topSmokeLeft.tilePosition.x -= 0.4;
+            this.topSmokeMid.tilePosition.x += 1.4;
+        }
+        
         this.app.render(this.mainLayer);
     }
 
@@ -172,12 +215,12 @@ export default class Canvas extends Component {
     * 
     **/
     updateDimensions() {
-       
         let temp_width = window.innerWidth;
         this.setState({ width: temp_width });
-
+        
         if (this.app){
- 
+            this.playPause.view.x = temp_width
+
             this.app.resize(this.state.width, this.state.height);
             this.survive_txt.x = window.innerWidth / 2;
          

@@ -38,7 +38,22 @@ export default class GalleryItem extends EventEmitter {
         this.view.alpha = 0;
         this.updateDimensions();
         this._animSetup();
+
+        this.paused =  false;
         
+    }
+
+    pause(paused) {
+        this.paused = paused;
+        
+        if(paused){
+            this.timeline.pause();
+        } else {
+
+            this.timeline.resume(null, true);
+            this.eventTriggered = false;
+       
+        }
     }
 
     updateDimensions(){
@@ -81,9 +96,11 @@ export default class GalleryItem extends EventEmitter {
     transitionComplete(){
         this.eventTriggered = false;
         this._setupTxt();
+        
     }
 
     animUpdate(e){
+        if (this.paused) return;
         if (this.timeline.progress() > 0.45 && !this.eventTriggered){
             this.emitEvent('tranitionStart', [this]);
             this.eventTriggered = true;
@@ -96,6 +113,7 @@ export default class GalleryItem extends EventEmitter {
     }
 
     play(){
+    
         this.timeline.restart();
         this.timeline.play().timeScale(0.8)
     }

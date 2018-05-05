@@ -107,6 +107,17 @@
   top: 1px;
 }
 
+.video-react .sb-button:focus {
+    text-shadow: 0em 0em 1em white;
+    -webkit-box-shadow: 0 0 1em #fff;
+    box-shadow: 0 0 1em #fff;
+}
+.video-react .cc-button:focus {
+    text-shadow: 0em 0em 1em white;
+    -webkit-box-shadow: 0 0 1em #fff;
+    box-shadow: 0 0 1em #fff;
+}
+
 .videoComponent .social{
   display: block;
   width: 25px;

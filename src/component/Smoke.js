@@ -16,6 +16,7 @@ function Smoke(app, mainLayer){
     this.uniforms.transg = { type: '1f', value: 79.0 };
     this.uniforms.transb = { type: '1f', value: 84.0 };
     this.animationPaussed = false;
+    this.paused = false
 
     this.smokeShader = new PIXI.AbstractFilter(null, shaderCode, this.uniforms);
     
@@ -29,6 +30,7 @@ function Smoke(app, mainLayer){
     this.view.blendMode = PIXI.BLEND_MODES.MULTIPLY
 
     this.animation = (delta) => {
+        if(this.paused) return;
         requestAnimationFrame(this.animation.bind(this));
         if (this.animationPaussed !== true){
             this.count += 0.009;
@@ -37,10 +39,19 @@ function Smoke(app, mainLayer){
         //console.log(this.smokeShader.uniforms.time.value);
     }
 
-    this.updateWidth = function( w ) {
+    this.updateWidth = function (w) {
         this.smokeShader.uniforms.resolution.value.x = w * 1.5;
         this.view.width = w;
     }
+
+    this.pause = function (paused) {
+        this.paused = paused;
+        if(!paused){
+            requestAnimationFrame(this.animation.bind(this));
+        }
+        //console.log('smoke: ', paused)
+    }
+
 
     this.animation();
   

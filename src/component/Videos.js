@@ -21,6 +21,12 @@ class Videos extends Component {
             visible: false,
             videoKey: 'coach',
         }
+        document.onkeydown =  (evt) => {
+            evt = evt || window.event;
+            if (evt.keyCode === 27) {
+                this.closeVideo();
+            }
+        };
     }
 
 
@@ -75,7 +81,7 @@ class Videos extends Component {
            
             <div data-grid="container" role="main" className="videos">
                 <section data-grid="col-12" className="videoHolder">
-                    <div ref="videoComponent" className="videoComponent" data-grid="col-10">
+                    <div ref="videoComponent" className="videoComponent" data-grid="col-9">
                         <VideoPlayer ref="VideoPlayer" parent={this} cookies={this.props.cookies} videoKey={this.state.videoKey} visible={this.state.visible}>
                         </VideoPlayer>
                     </div>
