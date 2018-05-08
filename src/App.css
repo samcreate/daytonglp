@@ -6,4 +6,97 @@
 #daytonApp canvas{
   width: 100% !important;
 }
+#daytonApp .playpause-btn{
+  color:white;
+  float:right;
+  position: relative;
+  right: -5%;
+  display: inline-block;
+  overflow: hidden;
+  text-indent: -9999px;
+}
+
+
+#daytonApp .pause-btn:before {
+  content: '';
+  float: left;
+  text-indent: 0;
+  font-size: 32px;
+  font-weight: bold;
+}
+
+#daytonApp .play-btn:before {
+  content: '';
+  float: left;
+  text-indent: 0;
+  font-size: 32px;
+  font-weight: bold;
+  margin-left: -8px;
+}
+
+
+#pause-container{
+  position: absolute;
+  width: 100%;
+  margin-top: 508px;
+}
+
+#pause-container p {
+    font-family: "Segoe UI",SegoeUI,"Helvetica Neue",Helvetica,Arial,sans-serif !important;
+    text-transform: uppercase;
+    letter-spacing: 33px;
+    font-weight: 400;
+    font-size: 31px;
+    padding: 72px 0px;
+    line-height: 50px;
+    color: white;
+  }
+
+
+@media (max-width: 1154px){
+  #pause-container p {
+    font-size: 27px;;
+  }
+
+}@media (max-width: 994px){
+  #pause-container p {
+    font-size: 21px;
+  }
+
+}
+@media (max-width: 927px){
+  #pause-container p {
+    font-size: 21px;
+    padding: 41px 0px;
+  }
+
+}
+
+
+@media (max-width: 526px){
+  #pause-container p {
+    font-size: 34px;
+    padding: 43px 0px;
+    letter-spacing: 14px;
+  }
+
+  #daytonApp .play-btn:before {
+    content: '\E768';
+    float: left;
+    text-indent: 0;
+    font-size: 32px;
+    font-weight: bold;
+    margin-left: -8px;
+}
+
+}
+@media (max-width: 1083px){
+#daytonApp .playpause-btn {
+  color:white;
+  float:right;
+  position: relative;
+  right: 1%;
+}
+
+}
 

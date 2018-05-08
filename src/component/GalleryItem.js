@@ -1,5 +1,5 @@
 import * as PIXI from 'pixi.js';
-import { Sine, TimelineLite } from "gsap";
+import { Sine, TimelineMax } from "gsap";
 import EventEmitter from 'wolfy87-eventemitter'
 export default class GalleryItem extends EventEmitter {
 
@@ -29,7 +29,7 @@ export default class GalleryItem extends EventEmitter {
         this.image.mask = this.mask;
         this.initWidth = this.text.width;
 
-        this.timeline = new TimelineLite({ paused: true, onComplete: this.transitionComplete.bind(this), onUpdate: this.animUpdate.bind(this) });
+        this.timeline = new TimelineMax({ paused: true, onComplete: this.transitionComplete.bind(this), onUpdate: this.animUpdate.bind(this) });
         
         window.addEventListener('resize', this.updateDimensions.bind(this));
 

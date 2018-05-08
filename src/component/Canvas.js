@@ -2,11 +2,10 @@ import './Canvas.css';
 import React, { Component } from 'react';
 import * as PIXI from 'pixi.js'
 import Smoke from './Smoke';
-import {  Linear, Sine, TimelineLite } from "gsap";
+import { Linear, Sine, TimelineMax, TweenMax } from "gsap";
 import Gallery from './Gallery';
 import MobileDetect from 'mobile-detect';
 import gradient from './gradient';
-import PlayPause from './PlayPause';
 export default class Canvas extends Component {
 
     /**
@@ -28,7 +27,7 @@ export default class Canvas extends Component {
 
         this.md = new MobileDetect(window.navigator.userAgent);
 
-        this.timeline = new TimelineLite({ paused: true, onComplete: this.transitionComplete.bind(this)});
+        this.timeline = new TimelineMax({ paused: true, onComplete: this.transitionComplete.bind(this)});
     }
 
     /**
@@ -36,6 +35,7 @@ export default class Canvas extends Component {
     * and hook up the PixiJS renderer
     **/
     componentDidMount() {
+
 
         //handle window resize
         window.addEventListener('resize', this.updateDimensions.bind(this));
@@ -59,7 +59,6 @@ export default class Canvas extends Component {
         // this.blackOut.drawRect(0, 0, window.innerWidth, 800);
         // this.blackOut.alpha = 0;
 
-        this.playPause = new PlayPause();
 
         let gradientTexture = PIXI.Texture.fromImage(gradient);
        
@@ -75,22 +74,27 @@ export default class Canvas extends Component {
         this.setupGallery().next();
         this.updateDimensions();
         this.setupTimeline();
-        this.mainLayer.addChild(this.playPause.view);
         this.mainLayer.addChild(this.blackOut);
         
-        this.playPause.view.x = window.innerWidth - 30;
-        this.playPause.view.y = 520;
-        this.playPause.on('paused', this.handlePause.bind(this));
         this.paused = false;
-        
+
+       // this.handlePause(this.props.paused);
+        console.log('this.props.paused',this.props.paused)
     }
 
     handlePause(btn, paused){
         this.paused = paused;
-
+        
+        if (paused) {
+            TweenMax.globalTimeScale(0);
+        } else {
+            TweenMax.globalTimeScale(1);
+        } 
     
-        this.gallery.pause(paused);
+      
         this.smoke.pause(paused);
+
+        
     }
 
     setupSmoke(){
@@ -141,7 +145,7 @@ export default class Canvas extends Component {
             .to(this.topSmokeRight, 1.1, { alpha: 1, ease: Linear.easeNone }, 'whiteout')
             .to(this.topSmokeLeft, 1.1, { alpha: 1, ease: Linear.easeNone }, 'whiteout')
             .to(this.topSmokeMid, 1.1, { alpha: 1, ease: Linear.easeNone }, 'whiteout')
-            .to(this.gallery.view, this.state.transitionTImeIn, { alpha: 0.6, ease: Sine.easeInOut }, 'whiteout')
+            .to(this.gallery.view, this.state.transitionTImeIn, { alpha: 0.5, ease: Sine.easeInOut }, 'whiteout')
             .to(this.blackOut, this.state.transitionTImeIn, { alpha: 0.6, ease: Sine.easeInOut }, 'whiteout')
             .to(this.smoke.smokeShader.uniforms.brightness, this.state.transitionTImeIn, { value: 6, ease: Sine.easeInOut }, 'whiteout')
             .to(this.smoke.smokeShader.uniforms.whiteness, this.state.transitionTImeIn, { value: 1.1, ease: Sine.easeInOut }, 'whiteout');
@@ -165,16 +169,16 @@ export default class Canvas extends Component {
 
         
 
-        this.mainLayer.addChild(this.survive_txt);
-        this.mainLayer.addChild(this.survive_mobile_txt)
-        this.survive_txt.blendMode = PIXI.BLEND_MODES.SCREEN;
-        this.survive_txt.anchor.set(0.5, 0);
-        this.survive_txt.y = this.state.height - 80;
-        this.survive_txt.x = window.innerWidth / 2;
-        this.survive_mobile_txt.blendMode = PIXI.BLEND_MODES.SCREEN;
-        this.survive_mobile_txt.anchor.set(0.5, 0);
-        this.survive_mobile_txt.y = this.state.height - 105;
-        this.survive_mobile_txt.x = window.innerWidth / 2;
+        // this.mainLayer.addChild(this.survive_txt);
+        // this.mainLayer.addChild(this.survive_mobile_txt)
+        // this.survive_txt.blendMode = PIXI.BLEND_MODES.SCREEN;
+        // this.survive_txt.anchor.set(0.5, 0);
+        // this.survive_txt.y = this.state.height - 80;
+        // this.survive_txt.x = window.innerWidth / 2;
+        // this.survive_mobile_txt.blendMode = PIXI.BLEND_MODES.SCREEN;
+        // this.survive_mobile_txt.anchor.set(0.5, 0);
+        // this.survive_mobile_txt.y = this.state.height - 105;
+        // this.survive_mobile_txt.x = window.innerWidth / 2;
   
         return this.gallery;
     }
@@ -195,7 +199,7 @@ export default class Canvas extends Component {
 
     transitionComplete(){
         this.gallery.next();
-        this.timeline.reverse(5);
+        this.timeline.reverse();
     }
 
     animation(delta){
@@ -219,8 +223,8 @@ export default class Canvas extends Component {
         this.setState({ width: temp_width });
         
         if (this.app){
-            this.playPause.view.x = temp_width
 
+        
             this.app.resize(this.state.width, this.state.height);
             this.survive_txt.x = window.innerWidth / 2;
          
@@ -248,6 +252,7 @@ export default class Canvas extends Component {
     * Render our container that will store our PixiJS game canvas. Store the ref
     **/
     render() {
+        
         return (
             <div className="Smoker" ref="Smoke">
             </div>

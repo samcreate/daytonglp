@@ -15,6 +15,7 @@
     "react-scripts": "1.1.1",
     "redux": "^3.7.2",
     "underscore": "^1.8.3",
+    "url-safe-string": "^1.1.0",
     "video-react": "^0.10.4",
     "wolfy87-eventemitter": "^5.2.4"
   },

@@ -8,6 +8,7 @@ import './VideoPlayer.css';
 import MobileDetect from 'mobile-detect';
 import CCButton from './CCButton';
 import SettingsButton from './SettingsButton';
+import SafeString from 'url-safe-string';
 export default class VideoPlayer extends Component {
 
 
@@ -34,6 +35,8 @@ export default class VideoPlayer extends Component {
 
         this.throttle = _.throttle(this.handleStateChange.bind(this), 500);
 
+        this.safeString = new SafeString();
+
         this.state = {
             subTitleIndex: 0,
             overlayVisible: false,
@@ -56,13 +59,13 @@ export default class VideoPlayer extends Component {
                         vtt: {
                             en: {
                                 kind: "subtitles",
-                                src: "video/vtt/coach1sintel-en.vtt",
+                                src: "/en-us/games/state-of-decay-2/vtt/coach1sintel-en.vtt",
                                 srcLang: "en",
                                 default: !0
                             },
                             fr: {
                                 kind: "subtitles",
-                                src: "video/vtt/coach1sintel-fr.vtt",
+                                src: "/en-us/games/state-of-decay-2/vtt/coach1sintel-fr.vtt",
                                 srcLang: "en",
                                 default: !0
                             }
@@ -84,13 +87,13 @@ export default class VideoPlayer extends Component {
                             vtt: {
                                 en: {
                                     kind: "subtitles",
-                                    src: "video/vtt/coach3sintel-prag-en.vtt",
+                                    src: "/en-us/games/state-of-decay-2/vtt/coach3sintel-prag-en.vtt",
                                     srcLang: "en",
                                     default: true
                                 },
                                 fr: {
                                     kind: "subtitles",
-                                    src: "video/vtt/coach3sintel-prag-fr.vtt",
+                                    src: "/en-us/games/state-of-decay-2/vtt/coach3sintel-prag-fr.vtt",
                                     srcLang: "en",
                                     default: true
                                 }
@@ -109,13 +112,13 @@ export default class VideoPlayer extends Component {
                             vtt: {
                                 en: {
                                     kind: "subtitles",
-                                    src: "video/vtt/coach2sintel-compassion-en.vtt",
+                                    src: "/en-us/games/state-of-decay-2/vtt/coach2sintel-compassion-en.vtt",
                                     srcLang: "en",
                                     default: true
                                 },
                                 fr: {
                                     kind: "subtitles",
-                                    src: "video/vtt/coach2sintel-compassion-fr.vtt",
+                                    src: "/en-us/games/state-of-decay-2/vtt/coach2sintel-compassion-fr.vtt",
                                     srcLang: "en",
                                     default: true
                                 }
@@ -140,13 +143,13 @@ export default class VideoPlayer extends Component {
                         vtt: {
                             en: {
                                 kind: "subtitles",
-                                src: "video/vtt/nurse1sintel-en.vtt",
+                                src: "/en-us/games/state-of-decay-2/vtt/nurse1sintel-en.vtt",
                                 srcLang: "en",
                                 default: true
                             },
                             fr: {
                                 kind: "subtitles",
-                                src: "video/vtt/nurse1sintel-fr.vtt",
+                                src: "/en-us/games/state-of-decay-2/vtt/nurse1sintel-fr.vtt",
                                 srcLang: "en",
                                 default: true
                             }
@@ -168,13 +171,13 @@ export default class VideoPlayer extends Component {
                             vtt: {
                                 en: {
                                     kind: "subtitles",
-                                    src: "video/vtt/nurse2sintel-daring-en.vtt",
+                                    src: "/en-us/games/state-of-decay-2/vtt/nurse2sintel-daring-en.vtt",
                                     srcLang: "en",
                                     default: true
                                 },
                                 fr: {
                                     kind: "subtitles",
-                                    src: "video/vtt/nurse2sintel-daring-fr.vtt",
+                                    src: "/en-us/games/state-of-decay-2/vtt/nurse2sintel-daring-fr.vtt",
                                     srcLang: "en",
                                     default: true
                                 }
@@ -193,13 +196,13 @@ export default class VideoPlayer extends Component {
                             vtt: {
                                 en: {
                                     kind: "subtitles",
-                                    src: "video/vtt/nurse3sintel-prudent-en.vtt",
+                                    src: "/en-us/games/state-of-decay-2/vtt/nurse3sintel-prudent-en.vtt",
                                     srcLang: "en",
                                     default: true
                                 },
                                 fr: {
                                     kind: "subtitles",
-                                    src: "video/vtt/nurse3sintel-prudent-fr.vtt",
+                                    src: "/en-us/games/state-of-decay-2/vtt/nurse3sintel-prudent-fr.vtt",
                                     srcLang: "en",
                                     default: true
                                 }
@@ -472,7 +475,6 @@ export default class VideoPlayer extends Component {
 
     render() {
 
-
         let { content, options, optionsCopy} = this.getVideoState(this.props.videoKey);
         let optionsHtml;
         let autoPlay = this.props.visible;
@@ -497,7 +499,7 @@ export default class VideoPlayer extends Component {
                     </div>
                     <div data-grid="col-3"></div>
                     <div data-grid="col-6 pad-3x" className={this.state[this.props.videoKey].end.key +' videoThumb'}>
-                        <a onClick={this.playOtherVideoSeries.bind(this, this.state[this.props.videoKey].end.key)} href={"#play" + this.state[this.props.videoKey].end.key} tabIndex="0" role="listitem" aria-labelledby="Play Other Video Series" className="end" >
+                        <a onClick={this.playOtherVideoSeries.bind(this, this.state[this.props.videoKey].end.key)} href={"#play" + this.state[this.props.videoKey].end.key} tabIndex="0" role="listitem" aria-labelledby="Play Other Video Series" className="end" data-clickname={"www>games>state-of-decay-2>video-feature>" + this.props.videoKey + ">watch-other-story>click"} >
                             <div className='rectangle-box'>
                                 <div className='rectangle-content'>
                                     <div>
@@ -522,7 +524,7 @@ export default class VideoPlayer extends Component {
                         <div data-grid="col-3"></div>
                     </div>
                     <div data-grid="col-12">
-                        < a href={'#' + options[0].video.button} onClick={this.nextVideo.bind(this, options[0].id)} aria-labelledby={options[0].video.button}>{options[0].video.button} </a>
+                        < a href={'#' + options[0].video.button} onClick={this.nextVideo.bind(this, options[0].id)} aria-labelledby={options[0].video.button} data-clickname={"www>games>state-of-decay-2>video-feature>" + this.props.videoKey + ">" + this.safeString.generate(options[0].video.button) + ">click"}>{options[0].video.button} </a>
                     </div>
                 </div>
             );
@@ -539,7 +541,7 @@ export default class VideoPlayer extends Component {
                         <div data-grid="col-3"></div>
                     </div>
                     <div data-grid="col-5">
-                        < a href={'#' + options[0].video.button} onClick={this.nextVideo.bind(this, options[0].id)} aria-labelledby={options[0].video.button}>{options[0].video.button} </a>
+                        < a href={'#' + options[0].video.button} onClick={this.nextVideo.bind(this, options[0].id)} aria-labelledby={options[0].video.button} data-clickname={"www>games>state-of-decay-2>video-feature>" + this.props.videoKey + ">" + this.safeString.generate(options[0].video.button) + ">click"}>{options[0].video.button} </a>
                     </div>
                     <div data-grid="col-2">
                         <p className="or">
@@ -547,18 +549,22 @@ export default class VideoPlayer extends Component {
                         </p>
                     </div>
                     <div data-grid="col-5">
-                        < a href={'#' + options[1].video.button} onClick={this.nextVideo.bind(this, options[1].id)} aria-labelledby={options[1].video.button}>{options[1].video.button} </a>
+                        < a href={'#' + options[1].video.button} onClick={this.nextVideo.bind(this, options[1].id)} data-clickname={"www>games>state-of-decay-2>video-feature>" + this.props.videoKey + ">" + this.safeString.generate(options[1].video.button) +">click"} aria-labelledby={options[1].video.button}>{options[1].video.button} </a>
                     </div>
                 </div>
             );
         }
 
         //console.log('render() -> content.video.src', content.video.src.split('?')[1]);
+
+        //
+
+        
       
         return (
             <div className={this.props.visible ? 'visible' : 'hidden'} ref="videoContainer">
                 <h4 className="c-heading-4">{content.title}</h4>
-                <a href="#closeVideo" className="closeButton c-glyph x-hidden-focus" onClick={this.closeVideo.bind(this)} aria-labelledby="Close Video Overlay">close video</a>
+                <a href="#closeVideo" className="closeButton c-glyph x-hidden-focus" onClick={this.closeVideo.bind(this)} data-clickname={"www>games>state-of-decay-2>video-feature>" + this.props.videoKey + ">close-video-x>click"} aria-labelledby="Close Video Overlay">close video</a>
                 <Player
                     playsInline={false}
                     startTime={content.video.lastPlayTime}

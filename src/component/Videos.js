@@ -7,6 +7,7 @@ import { instanceOf } from 'prop-types';
 import {Cookies } from 'react-cookie';
 import VideoPlayer from './VideoPlayer';
 import MobileDetect from 'mobile-detect';
+
 class Videos extends Component {
 
     static propTypes = {
@@ -34,6 +35,8 @@ class Videos extends Component {
        
         if (e) e.preventDefault();
 
+        this.props.parent.playPause()
+
        this.setState({
            visible: true,
            videoKey: vid
@@ -43,11 +46,12 @@ class Videos extends Component {
 
 
     closeVideo(e){
-        
+        this.props.parent.playPause();
         this.setState({
             visible: false
         });
         this.refs.VideoPlayer.closeVideo(true);
+        
     }
 
     stopBodyScrolling(bool) {
@@ -67,13 +71,7 @@ class Videos extends Component {
         }
     }
 
-    // componentDidMount() {
-    //     if (this.md.mobile()) {
-           
-    //         this.refs.videoComponent.style.height = window.innerHeight+'px';
-    //         this.refs.videoComponent.style.overflowY = "auto";
-    //     }
-    // }
+ 
 
     render() {
 
@@ -85,14 +83,14 @@ class Videos extends Component {
                         <VideoPlayer ref="VideoPlayer" parent={this} cookies={this.props.cookies} videoKey={this.state.videoKey} visible={this.state.visible}>
                         </VideoPlayer>
                     </div>
-                    <div onClick={this.closeVideo.bind(this)} className={this.state.visible ? 'visible modal' : 'hidden modal'}>&nbsp;</div>
+                    <div onClick={this.closeVideo.bind(this)} className={this.state.visible ? 'visible modal' : 'hidden modal'} data-clickname={"www>games>state-of-decay-2>video-feature>" + this.state.videoKey + ">close-video-x>click"} >&nbsp;</div>
                 </section>
                 <div data-grid="col-12" >
                     <p className="c-subheading-1" >Watch their stories. Decide for yourself. </p>
                 </div>
                 <section data-grid="col-12 ">
                     <div data-grid="col-6 pad-3x" className="videoThumb coach ">
-                        <a href="#playCoach"  onClick={this.handleVideo.bind(this, 'coach')}>
+                        <a href="#playCoach" onClick={this.handleVideo.bind(this, 'coach')} data-clickname={"www>games>state-of-decay-2>video-feature>coach>play-series>click"}>
                             <div className='rectangle-box'>
                                 <div className='rectangle-content'>
                                     <div>
@@ -104,7 +102,7 @@ class Videos extends Component {
                         </a>
                     </div>
                     <div data-grid="col-6 pad-3x" className="videoThumb nurse">
-                        <a href="#playNuse" onClick={this.handleVideo.bind(this, 'nurse')}>
+                        <a href="#playNuse" onClick={this.handleVideo.bind(this, 'nurse')} data-clickname={"www>games>state-of-decay-2>video-feature>nurse>play-series>click"}>
                             <div className='rectangle-box'>
                                 <div className='rectangle-content'>
                                     <div>

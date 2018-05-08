@@ -1,5 +1,5 @@
 import * as PIXI from 'pixi.js';
-import { TweenLite, Sine} from "gsap";
+import { TweenMax, Sine} from "gsap";
 import EventEmitter from 'wolfy87-eventemitter';
 import GalleryItem from './GalleryItem';
 export default class Gallery extends EventEmitter {
@@ -11,7 +11,9 @@ export default class Gallery extends EventEmitter {
         this.slides = [];
         this.currentSlide = -1;
 
-        this.pausedSlides = [];
+        this.currentSlideAnim;
+
+        this.pausedSlides;
 
         this.paused = false;
         
@@ -30,15 +32,23 @@ export default class Gallery extends EventEmitter {
     next(){
         if(this.paused) return;
             if (this.currentSlide < this.slides.length -1) {
+
+                
                 this.currentSlide++;
-                this.slides[this.currentSlide].view.alpha = 1;
-                this.slides[this.currentSlide].play();
+                this.currentSlideAnim = this.slides[this.currentSlide];
+          
+                this.currentSlideAnim.view.alpha = 1;
+                this.currentSlideAnim.play();
+               
                 this.start = true;
                 this.emitEvent('slideStart', [this.slides[this.currentSlide]]);
+                
             } else {
                 this.currentSlide = -1;
                 this.next();
             }
+
+            
     }
 
     addChild(child){
@@ -46,27 +56,20 @@ export default class Gallery extends EventEmitter {
     }
 
     pause(paused){
-        this.slides.forEach(element => {
-            // element.pause(paused);
-            if (!element.timeline.paused()){
-                //('pause', element)
-                this.pausedSlides.push(element);
-                element.pause(paused);
-            }
-        });
+        
         this.paused = paused;
         
-        if(!paused){
-            
-            this.pausedSlides.forEach(element => {
-                //console.log('unpause ', element)
-                element.pause(paused);
-            });
+        if (this.currentSlideAnim !== undefined && paused === false) {
+            //console.log('resume this clide ', this.currentSlide);
+            this.currentSlideAnim.pause(paused);
         }
+
+
         if (paused && this.animation1 !== undefined){
-            this.animation1.paused();
-            this.animation2.paused();
+            this.animation1.pause();
+            this.animation2.pause();
         } else if (this.animation1 !== undefined){
+            //console.log('resume')
             this.animation1.resume(null, true);
             this.animation2.resume(null, true);
             
@@ -75,10 +78,12 @@ export default class Gallery extends EventEmitter {
 
     triggerTransition(slide){
  
-            this.emitEvent('startTransition', [this]);
+        this.emitEvent('startTransition', [this]);
 
-            this.animation1 =  TweenLite.to(slide.view, 2, { alpha: 0, ease: Sine.easeInOut, delay:2 });
-            this.animation2 =  TweenLite.to(this.slides[this.currentSlide].view, 2, { alpha: 1, ease: Sine.easeInOut });
+        
+
+        this.animation1 = TweenMax.to(slide.view, 2, { alpha: 0, ease: Sine.easeInOut, delay:2 });
+        this.animation2 = TweenMax.to(this.slides[this.currentSlide].view, 2, { alpha: 1, ease: Sine.easeInOut });
             
     }
     
